@@ -39,13 +39,21 @@ def draw_letters():
         letter_map[letter] -= 1
 
         if letter_map[letter] == 0:
-            index_of_letter = letter_pool.index(letter)
-            letter_pool.pop(index_of_letter)
+            letter_pool.remove(letter)
     
     return result
 
 def uses_available_letters(word, letter_bank):
-    pass
+    upper_word = word.upper()
+    copy_of_letter_bank = letter_bank[:]
+    
+    for letter in upper_word:
+        if letter not in copy_of_letter_bank:
+            return False
+        
+        copy_of_letter_bank.remove(letter)
+    
+    return True
 
 def score_word(word):
     pass
@@ -53,4 +61,3 @@ def score_word(word):
 def get_highest_word_score(word_list):
     pass
 
-draw_letters()
