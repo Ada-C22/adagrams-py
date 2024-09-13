@@ -34,7 +34,10 @@ def draw_letters():
     hand =[]
     letter_frequncies={}
     while len(hand)<10:
-        random_letter = random.choice(string.ascii_letters).upper()
+        # random_letter = random.choice(string.ascii_letters).upper()
+        alphabet = list(LETTER_POOL.keys())
+        random_index = random.randint(0,25)
+        random_letter = alphabet[random_index]
         if random_letter not in hand:
             hand.append(random_letter)
             letter_frequncies[random_letter]=1
