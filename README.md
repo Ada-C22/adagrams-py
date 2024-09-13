@@ -94,6 +94,7 @@ $ source venv/bin/activate
 ```bash
 # Must be in activated virtual environment
 $ python main.py wave
+#pytest tests/test_wave_01.py
 ```
 
 3. Use play-testing to guide your development.
