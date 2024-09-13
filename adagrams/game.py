@@ -50,8 +50,8 @@ def draw_letters():
             letters_frequency[letter_index] -= 1
             final_string.append(letters_list[letter_index])
         
-           
     return final_string
+
 
 def uses_available_letters(word, letter_bank):
     available_letters = []
@@ -69,6 +69,7 @@ def uses_available_letters(word, letter_bank):
             return False
     return True
 
+
 def score_word(word):
     
     score_values = {
@@ -81,17 +82,17 @@ def score_word(word):
         10: ["Q", "Z"]
     }
     score = 0
+    index = 0
     word_uppercase = word.upper()
-    
-
-    
     for letter in word_uppercase:
         for num_key, letter_value in score_values.items():
             if letter in letter_value:
                 score += num_key
     if  6 < len(word_uppercase) < 11:
         score += 8
+    print(score)
     return score
+
 
 def get_highest_word_score(word_list):
     words_entered = []
@@ -112,29 +113,46 @@ def get_highest_word_score(word_list):
             winning_score = score_data[index]
             winning_word = words_entered[index]
             
-
         elif score == winning_score:
-
             if len(winning_word) == 10:
-                print (winning_score)
                 continue
+            if len(words_entered[index]) == 10:
+                winning_score = score_data[index]
+                winning_word = words_entered[index]
             
-            elif len(words_entered[index]) > len(winning_word) :
+            elif len(words_entered[index]) < len(winning_word) :
                 winning_score = score_data[index]
                 winning_word = words_entered[index]
                 
                 
-            elif len(winning_word) < len(words_entered[index]):
-                
+            elif len(winning_word) > len(words_entered[index]):
                 continue
             else:
-                winning_score = score_data[index]
-                winning_word = words_entered[index]
+                loop_count = 0
+                for index_word in words_entered:
+                    if index_word == winning_word:
+                        winning_score_index = loop_count
+                    else:
+                        loop_count += 1
+                if index < winning_score_index:
+                    winning_score = score_data[index]
+                    winning_word = words_entered[index]
+
+                
         if index == len(score_data):
             return (winning_word, winning_score)
         else:
+            
             index += 1
-    return ( winning_word, winning_score)
+        
+        
+
+    return (winning_word, winning_score)
+
+
+
+
+
 
 
 
