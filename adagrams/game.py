@@ -30,12 +30,24 @@ LETTER_POOL = {
 }
 
 def draw_letters():
-    letter_pool = list(LETTER_POOL.keys())
-    letter_pool_distribution = list(LETTER_POOL.values())
+    letter_pool = LETTER_POOL.copy()
+    letter_pool_keys = list(LETTER_POOL.keys())
 
-    random_letters = random.choices(letter_pool, letter_pool_distribution, k=10)
+    # have a variable with the list of chosen letters
+    chosen_letters = []
 
-    return random_letters
+    # use while loop to continue asking for random num 
+    while len(chosen_letters) != 10:
+        random_num = random.randint(0,25)
+        random_letter = letter_pool_keys[random_num]
+
+        if not letter_pool[random_letter]:
+            continue
+
+        chosen_letters.append(random_letter)
+        letter_pool[random_letter] -= 1
+
+    return chosen_letters
 
 def uses_available_letters(word, letter_bank):
     pass
