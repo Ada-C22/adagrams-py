@@ -28,6 +28,15 @@ LETTER_POOL = {
     'Y': 2, 
     'Z': 1
 }
+LETTER_POINTS = {
+    ("A", "E", "I", "O", "U", "L", "N", "R", "S", "T") : 1,
+    ("D", "G"): 2,
+    ("B", "C", "M", "P") : 3,
+    ("F", "H", "V", "W", "Y") : 4,
+    ("K") : 5,
+    ("J", "X") : 8,
+    ("Q", "Z") : 10
+}
 
 def draw_letters():
     letter_pool = LETTER_POOL.copy()
@@ -71,7 +80,18 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
-    pass
+    score = 0
+
+    word_uppercase = word.upper()
+    for letter in word_uppercase:
+        for letters, points in LETTER_POINTS.items():
+            if letter in letters:
+                score += points
+    
+    if len(word) in range(7,11):
+        score += 8
+
+    return score
 
 def get_highest_word_score(word_list):
     pass
