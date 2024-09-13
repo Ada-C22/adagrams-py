@@ -18,30 +18,41 @@ recorded_letters = {
 def draw_letters():
     best_keys_list_a = list(LETTER_POOL.keys())
     current_hand = []
-
-    while len(current_hand) < 150:
-        random_letter = random.choice(best_keys_list_a)
-        max_letter_quantity = LETTER_POOL[random_letter]
-
-        if recorded_letters[random_letter] < max_letter_quantity:
-            recorded_letters[random_letter] += 1
-            current_hand.append(random_letter)
-
-            # print(f'Pool: {random_letter, max_letter_quantity}')
-            print(f'Recorded: {random_letter, recorded_letters[random_letter], max_letter_quantity, recorded_letters[random_letter] <= max_letter_quantity}')
     
-    # print(recorded_letters)
-    print(f'Your hand {current_hand}')
-    print(f'Recorded: {recorded_letters[random_letter] <= max_letter_quantity}')
-
+    while len(current_hand) < 10:
+    # for i in range(10):
+        random_letter = random.choice(best_keys_list_a)
+        current_hand.append(random_letter)
+    
     return current_hand
 
 # def draw_letters():
 #     best_keys_list_a = list(LETTER_POOL.keys())
 #     current_hand = []
 
+#     while len(current_hand) < 10:
+#         random_letter = random.choice(best_keys_list_a)
+#         max_letter_quantity = LETTER_POOL[random_letter]
 
-#     for i in range(10):
+#         if recorded_letters[random_letter] < max_letter_quantity:
+#             recorded_letters[random_letter] += 1
+#             current_hand.append(random_letter)
+
+#             # print(f'Pool: {random_letter, max_letter_quantity}')
+#             print(f'Recorded: {random_letter, recorded_letters[random_letter], max_letter_quantity, recorded_letters[random_letter] <= max_letter_quantity}')
+    
+#     # print(recorded_letters)
+#     print(f'Your hand {current_hand}')
+#     print(f'Recorded: {recorded_letters[random_letter] <= max_letter_quantity}')
+
+#     return current_hand
+
+# def draw_letters():
+#     best_keys_list_a = list(LETTER_POOL.keys())
+#     current_hand = []
+
+#     while len(current_hand) < 10:
+#     # for i in range(10):
 #         random_letter = random.choice(best_keys_list_a)
 #         letter_pool_freq = LETTER_POOL[random_letter]
 #         recorded_letters_freq = recorded_letters[random_letter]
@@ -52,6 +63,7 @@ def draw_letters():
 #             current_hand.append(random_letter)
     
 #     return current_hand
+
 
 
 
