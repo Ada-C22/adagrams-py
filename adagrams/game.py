@@ -96,5 +96,15 @@ def score_word(word):
     return score
 
 def get_highest_word_score(word_list):
-    pass
-
+    highest_score = 0
+    
+    for word in word_list:
+        score = score_word(word)
+        if score > highest_score:
+            highest_score = score
+            highest_score_word = word
+            len_of_word = len(word)
+        elif score == highest_score:
+            
+    return (highest_score_word, highest_score)
+    
