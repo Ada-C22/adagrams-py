@@ -123,8 +123,7 @@ def get_highest_word_score(word_list):
             elif len(winning_word) > len(words_entered[index]):
                 continue
             else:
-                """Loop created to find the index of the current winning word,
-                  and compares it with the conflicting tied word """
+                
                 loop_count = 0
                 for index_word in words_entered:
                     if index_word == winning_word:
