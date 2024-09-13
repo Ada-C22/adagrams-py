@@ -93,5 +93,48 @@ def score_word(word):
     return score
 
 def get_highest_word_score(word_list):
-    pass
+    words_entered = []
+    score_data = []
+    index = 0
+    
+    for word in word_list:
+        score = score_word(word)
+        score_data.append(score)
+        words_entered.append(word)
 
+    winning_score =  score_data[0]
+    winning_word = words_entered[0]
+
+    for score in score_data:
+        
+        if score > winning_score:
+            winning_score = score_data[index]
+            winning_word = words_entered[index]
+            
+
+        elif score == winning_score:
+
+            if len(winning_word) == 10:
+                
+                continue
+            
+            elif len(words_entered[index]) == 10:
+                winning_score = score_data[index]
+                winning_word = words_entered[index]
+                
+                
+            elif len(winning_word) < len(words_entered[index]):
+                
+                continue
+            else:
+                winning_score = score_data[index]
+                winning_word = words_entered[index]
+        if index == len(score_data):
+            return (winning_word, winning_score)
+        else:
+            index += 1
+    return ( winning_word, winning_score)
+
+
+
+    
