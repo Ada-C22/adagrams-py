@@ -35,21 +35,22 @@ def draw_letters():
     letters_frequency = []
     letters_list = []
     
-    for letter_amount in LETTER_POOL:
-        letters_frequency.append(LETTER_POOL[letter_amount])
+    for letters in LETTER_POOL:
+        letters_frequency.append(LETTER_POOL[letters])
+    
 
     for letter in LETTER_POOL:
         letters_list.append(letter)
 
     while len(final_string) < 10:
-
+            
         letter_index = random.randint(0, len(LETTER_POOL) -1)
 
         if letters_frequency[letter_index] > 0:
             letters_frequency[letter_index] -= 1
             final_string.append(letters_list[letter_index])
         
-            
+           
     return final_string
 
 def uses_available_letters(word, letter_bank):
@@ -115,10 +116,10 @@ def get_highest_word_score(word_list):
         elif score == winning_score:
 
             if len(winning_word) == 10:
-                
+                print (winning_score)
                 continue
             
-            elif len(words_entered[index]) == 10:
+            elif len(words_entered[index]) > len(winning_word) :
                 winning_score = score_data[index]
                 winning_word = words_entered[index]
                 
