@@ -43,7 +43,6 @@ def draw_letters():
         letters_list.append(letter)
 
     while len(final_string) < 10:
-            
         letter_index = random.randint(0, len(LETTER_POOL) -1)
 
         if letters_frequency[letter_index] > 0:
@@ -112,32 +111,30 @@ def get_highest_word_score(word_list):
         if score > winning_score:
             winning_score = score_data[index]
             winning_word = words_entered[index]
-            
         elif score == winning_score:
             if len(winning_word) == 10:
                 continue
-            if len(words_entered[index]) == 10:
+            elif len(words_entered[index]) == 10:
                 winning_score = score_data[index]
                 winning_word = words_entered[index]
-            
             elif len(words_entered[index]) < len(winning_word) :
                 winning_score = score_data[index]
                 winning_word = words_entered[index]
-                
-                
             elif len(winning_word) > len(words_entered[index]):
                 continue
             else:
+                """Loop created to find the index of the current winning word,
+                  and compares it with the conflicting tied word """
                 loop_count = 0
                 for index_word in words_entered:
                     if index_word == winning_word:
                         winning_score_index = loop_count
                     else:
                         loop_count += 1
+
                 if index < winning_score_index:
                     winning_score = score_data[index]
                     winning_word = words_entered[index]
-
                 
         if index == len(score_data):
             return (winning_word, winning_score)
