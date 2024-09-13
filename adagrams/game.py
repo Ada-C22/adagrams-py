@@ -34,7 +34,9 @@ def draw_letters():
     result = []
     
     for i in range(10):
-        letter = random.choice(letter_pool)
+        # letter = random.choice(letter_pool)
+        index = random.randint(0, len(letter_pool) - 1)
+        letter = letter_pool[index]
         result.append(letter)
         letter_map[letter] -= 1
 
