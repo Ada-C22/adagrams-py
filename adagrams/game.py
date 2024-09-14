@@ -131,12 +131,12 @@ def get_highest_word_score(word_list):
     
     for word in word_list:
         score = score_word(word)
-        print(f"checking {word} , {score}")
+        # print(f"checking {word} , {score}")
         
         if score > best_score:
             best_word = word
             best_score = score
-            print(best_word, best_score)
+            # print(best_word, best_score)
         elif score == best_score:
             if len(word) < len(best_word) and len(best_word) != 10:
                 best_word = word #update word with few letters but same score
