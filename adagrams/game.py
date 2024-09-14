@@ -38,7 +38,8 @@ def draw_letters():
     letters = []
     
     while len(letters) < 10:
-        random_index = random.randrange(0,len(weighted_list))
+        weighted_list_length = len(weighted_list)
+        random_index = random.randrange(0,weighted_list_length)
         letters += weighted_list[random_index]
         weighted_list.pop(random_index)
         
@@ -46,7 +47,24 @@ def draw_letters():
     return letters
     
 def uses_available_letters(word, letter_bank):
-    pass
+    word = word.upper()
+    letters_in_word = ""
+
+    for letter in letter_bank:
+        if letter in word:
+            letters_in_word += letter
+    
+    letters_in_word_list = list(letters_in_word)
+    word_as_list = list(word)
+
+    letters_in_word_list.sort()
+    word_as_list.sort()
+
+    if letters_in_word_list == word_as_list:
+        return True
+    else:
+        return False
+
 
 def score_word(word):
     pass
