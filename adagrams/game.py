@@ -68,7 +68,7 @@ def draw_letters():
     user returns their hand to the pool before drawing new letters
     return 
     """
-    draw_letters = [] #create an empty list 
+    draw_letters = []
     
     while len(draw_letters) < 10: #this loop will run until we have 10 letters in our hand
         
@@ -77,7 +77,7 @@ def draw_letters():
         
         letter_count = draw_letters.count(random_letter) 
            
-        if letter_count < letter_pool[random_letter]: #this make sure you do not pick too many of same letters. 
+        if letter_count < letter_pool[random_letter]: 
             draw_letters.append(random_letter) 
 
                          
@@ -145,4 +145,3 @@ def get_highest_word_score(word_list):
     
     return best_word, best_score
        
-print(get_highest_word_score(["WWW", "MMMM", "BBBBBB", "AAAAAAAAD", "JQ", "KFHK"]))          
