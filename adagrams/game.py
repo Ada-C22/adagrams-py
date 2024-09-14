@@ -67,7 +67,28 @@ def uses_available_letters(word, letter_bank):
 
 
 def score_word(word):
-    pass
+    word_score = 0
+    word  = word.upper()
+    for letter in word:
+        if letter == "A" or letter == "E" or letter == "I" or letter == "O" or letter == "U" or letter == "L" or letter == "N" or letter == "R" or letter == "S" or letter == "T":
+            word_score += 1
+        elif letter == "D" or letter == "G":
+            word_score += 2
+        elif letter == "B" or letter == "C" or letter == "M" or letter == "P":
+            word_score += 3
+        elif letter == "F" or letter == "H" or letter == "V" or letter == "W" or letter == "Y":
+            word_score += 4
+        elif letter == "K":
+            word_score += 5
+        elif letter == "J" or letter == "X":
+            word_score += 8
+        elif letter == "Q" or letter == "Z":
+            word_score += 10
+    if len(word) >= 7:
+        word_score += 8
+
+    return word_score
+
 
 def get_highest_word_score(word_list):
     pass
