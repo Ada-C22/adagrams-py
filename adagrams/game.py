@@ -42,10 +42,8 @@ def draw_letters():
     letter_pool = LETTER_POOL.copy()
     letter_pool_keys = list(LETTER_POOL.keys())
 
-    # have a variable with the list of chosen letters
     chosen_letters = []
-
-    # use while loop to continue asking for random num 
+ 
     while len(chosen_letters) != 10:
         random_num = random.randint(0,25)
         random_letter = letter_pool_keys[random_num]
@@ -94,4 +92,40 @@ def score_word(word):
     return score
 
 def get_highest_word_score(word_list):
-    pass
+    highest_score = 0
+    word_and_points_dict = {}
+    
+    for word in word_list:
+        points = score_word(word)
+
+        if points in word_and_points_dict.keys():
+            word_and_points_dict[points].append(word)
+        else:
+            word_and_points_dict[points] = [word]
+
+        if points > highest_score:
+            highest_score = points
+
+
+    # DETERMINE TIE BREAKER
+    highest_scoring_words = word_and_points_dict[highest_score]
+
+    if len(highest_scoring_words) < 2:
+        return highest_scoring_words[0], highest_score
+    
+    shortest_word = highest_scoring_words[0]
+    for word in highest_scoring_words:
+        if len(word) == 10:
+            return word, highest_score
+        
+        if len(word) < len(shortest_word):
+            shortest_word = word
+    
+    return shortest_word, highest_score
+
+
+
+
+
+
+
