@@ -47,15 +47,20 @@ def draw_letters():
             hand_bank.append(letter_pool[idx])
             del letter_pool[idx]
     return hand_bank
-print(draw_letters())
-
-
-
 
 
 
 def uses_available_letters(word, letter_bank):
-    pass
+    letter_bank = letter_bank.copy()
+    # letter_bank = draw_letters()
+    for letter in word:
+        letter = letter.upper()
+        if letter not in letter_bank:
+            return False
+        letter_bank.remove(letter)
+    return True
+
+
 
 def score_word(word):
     pass
