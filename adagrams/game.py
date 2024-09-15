@@ -105,23 +105,20 @@ def score_word(word):
 
 def get_highest_word_score(word_list):
     highest_score = 0
-    highest_word = ["", 0]
+    highest_word = ""
 
     for word in word_list:
         score = score_word(word)
 
         if score > highest_score:
             highest_score = score
-            highest_word[0] = word
-            highest_word[1] = highest_score
+            highest_word = word
         elif score == highest_score:
-            if len(highest_word[0]) == 10:
+            if len(highest_word) == 10 :
                 continue
             elif len(word) == 10:
-                highest_word[0] = word
-            elif len(word) == len(highest_word[0]):
-                continue
-            elif len(word) < len(highest_word[0]):
-                highest_word[0] = word
+                highest_word = word
+            elif len(word) < len(highest_word):
+                highest_word = word
     
-    return tuple(highest_word)
+    return highest_word, highest_score
