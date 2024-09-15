@@ -59,17 +59,20 @@ def uses_available_letters(word, letter_bank):
 
     # compare word_count and letter_bank_count
     for key in word_count:
-        if key in letter_bank_count:
-            if word_count[key] != letter_bank_count[key]:
-                return False
-        else:
+        if key not in letter_bank_count or \
+            word_count[key] > letter_bank_count[key]:
             return False
     
     return True
 
 
 def score_word(word):
+    # bulid dict of score
+    # check each vlaue of letter
+    # more than 7, 8, 9, or 10 gets an additional 8 points
+    # return total score
     pass
+
 
 def get_highest_word_score(word_list):
     pass
