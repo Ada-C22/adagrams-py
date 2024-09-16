@@ -65,5 +65,19 @@ score_word("XXXXXXX")
 
 
 def get_highest_word_score(word_list):
+    print('------- Wave 4 -------')
+    word_score_board = {}
+    best_score = 0
+    best_word = ''
+
     for word in word_list:
-        print(score_word())
+        word_score_total = score_word(word)
+        word_score_board[word] = word_score_total
+
+    for word, word_score in word_score_board.items():
+        if word_score > best_score:
+            best_score = word_score
+            best_word = word
+    # print(best_score)
+    print(best_word)
+    return best_word, best_score
