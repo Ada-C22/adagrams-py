@@ -69,6 +69,7 @@ def uses_available_letters(word, letter_bank):
 def score_word(word):
     word_score = 0
     word  = word.upper()
+
     for letter in word:
         if letter == "A" or letter == "E" or letter == "I" or letter == "O" or letter == "U" or letter == "L" or letter == "N" or letter == "R" or letter == "S" or letter == "T":
             word_score += 1
@@ -84,6 +85,7 @@ def score_word(word):
             word_score += 8
         elif letter == "Q" or letter == "Z":
             word_score += 10
+
     if len(word) >= 7:
         word_score += 8
 
@@ -91,4 +93,69 @@ def score_word(word):
 
 
 def get_highest_word_score(word_list):
-    pass
+    word_score_dict = {}
+    high_score = ("", 0)
+
+    for word in word_list:
+        word_score_dict[word]= score_word(word)
+
+    for word, score in word_score_dict.items():
+        if score > high_score[1]:
+            high_score = word,score
+        elif score == high_score[1]:
+            high_score += word, score
+    if len(high_score) == 2:
+        return high_score
+    else:
+        for word,score in word_score_dict.items():
+            if len(word) == 10:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 2:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 3:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 4:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 5:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 6:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 7:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 8:
+                high_score = word, score
+                return high_score
+        for word,score in word_score_dict.items():
+            if len(word) == 9:
+                high_score = word, score
+                return high_score
+        
+        
+        
+    
+
+
+
+    
+
+    
+
+                
+                
+
+    
+    
