@@ -54,8 +54,27 @@ def draw_letters():
     return hand
 
 
+def deep_copy_letter_bank(letter_bank):
+    letter_bank_copy = []
+    for letter in letter_bank:
+        letter_bank_copy += [letter]
+    return letter_bank_copy
+
+
 def uses_available_letters(word, letter_bank):
-    pass
+    
+    copy_bank = deep_copy_letter_bank(letter_bank)
+    word = word.upper()
+    for letter in word:
+        if letter in copy_bank:
+            copy_bank.remove(letter)
+        else:
+            return False
+    return True
+
+
+
+
 
 def score_word(word):
     pass
