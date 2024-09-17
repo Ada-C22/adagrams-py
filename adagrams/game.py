@@ -42,28 +42,32 @@ def draw_letters():
         random_index = random.randrange(0,weighted_list_length)
         letters += weighted_list[random_index]
         weighted_list.pop(random_index)
-        
 
     return letters
     
 def uses_available_letters(word, letter_bank):
     word = word.upper()
-    letters_in_word = ""
+    letter_bank_copy = letter_bank[:]
+    matching_letters = []
 
-    for letter in letter_bank:
-        if letter in word:
-            letters_in_word += letter
+    for letter in word:
+        if letter in letter_bank_copy:
+            matching_letters += letter
+            letter_bank_copy.remove(letter)
+        else: 
+            return False
     
-    letters_in_word_list = list(letters_in_word)
     word_as_list = list(word)
 
-    letters_in_word_list.sort()
+    matching_letters.sort()
     word_as_list.sort()
 
-    if letters_in_word_list == word_as_list:
+
+    if matching_letters == word_as_list:
         return True
     else:
         return False
+
 
 
 def score_word(word):
@@ -107,39 +111,53 @@ def get_highest_word_score(word_list):
     if len(high_score) == 2:
         return high_score
     else:
-        for word,score in word_score_dict.items():
+        high_score_dict = {}
+        for i in range(0, len(high_score),2):
+            word = high_score[i]
+            score = high_score[i+1]
+            high_score_dict[word] = score
+
+        for word,score in high_score_dict.items():
             if len(word) == 10:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 2:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 3:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 4:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 5:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 6:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 7:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 8:
                 high_score = word, score
                 return high_score
-        for word,score in word_score_dict.items():
+            
+        for word,score in high_score_dict.items():
             if len(word) == 9:
                 high_score = word, score
                 return high_score

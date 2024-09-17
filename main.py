@@ -13,7 +13,7 @@ def wave_1_run_game():
         display_retry_instructions()
         continue_input = input()
         game_continue = continue_input == "y"
-   
+
     display_goodbye_message()
 
 def wave_2_run_game():
@@ -26,14 +26,14 @@ def wave_2_run_game():
         display_game_instructions()
         user_input_word = input()
 
-        while( not uses_available_letters(user_input_word, letter_bank)):
+        while(not uses_available_letters(user_input_word, letter_bank)):
             display_needs_valid_input_message()
             user_input_word = input()
 
         display_retry_instructions()
         continue_input = input()
         game_continue = continue_input == "y"
-   
+
     display_goodbye_message()
 
 def wave_3_run_game():
@@ -46,7 +46,7 @@ def wave_3_run_game():
         display_game_instructions()
         user_input_word = input()
 
-        while( not uses_available_letters(user_input_word, letter_bank)):
+        while(not uses_available_letters(user_input_word, letter_bank)):
             display_needs_valid_input_message()
             user_input_word = input()
         
@@ -69,7 +69,7 @@ def wave_4_run_game():
         display_game_instructions()
         user_input_word = input()
 
-        while( not uses_available_letters(user_input_word, letter_bank)):
+        while(not uses_available_letters(user_input_word, letter_bank)):
             display_needs_valid_input_message()
             user_input_word = input()
         
