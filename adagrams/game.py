@@ -78,40 +78,39 @@ def score_word(word):
         "J" : 8, "X" : 8,
         #7 points: 
         "Q" : 10, "Z" : 10
-    }
+        }
 
     word_score = 0
-    upper_word=word.upper()
+    upper_word = word.upper()
     for letter in upper_word:
         letter_value = letters_and_values[letter]
         word_score += letter_value
 # add 8 points to words that are over 7 letters. 
-    word_len=len(word)
-    if word_len >= 7: 
+    if len(word) >= 7: 
         word_score += 8
     return word_score
 
 def get_highest_word_score(word_list):
-    highest_score = 0
-    highest_str = ""
+    winning_score = 0
+    winning_str = ""
     for word in word_list:
         word_score = score_word(word)
         word_len = len(word)
 #       compare scores/find first highest score & assign      
-        if word_score  > highest_score: 
-            highest_score = word_score
-            highest_str = word
+        if word_score  > winning_score: 
+            winning_score = word_score
+            winning_str = word
             winning_word_len = len(word)
 #       Pick best highest score when score is tied. 
-        elif word_score == highest_score: 
+        elif word_score == winning_score: 
             if word_len == 10 and winning_word_len != 10:
-                highest_score = word_score
-                highest_str = word
+                winning_score = word_score
+                winning_str = word
                 winning_word_len = word_len
             elif word_len < winning_word_len and winning_word_len != 10:
-                highest_score = word_score
-                highest_str = word
+                winning_score = word_score
+                winning_str = word
                 winning_word_len = len(word)
 #   generate best_word tuple.                 
-    best_word = (highest_str, highest_score,)
+    best_word = (winning_str, winning_score,)
     return best_word
