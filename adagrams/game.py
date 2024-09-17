@@ -46,7 +46,19 @@ def draw_letters():
     return my_list
 
 def uses_available_letters(word, letter_bank):
-    pass
+    word_dictionary = {}
+    for letter in word.upper():
+        if letter in word_dictionary:
+            value = word_dictionary[letter]
+            word_dictionary[letter] = value + 1
+        else:
+            word_dictionary[letter] = 1
+
+    for letter in letter_bank:
+        if letter in word_dictionary:
+            value = word_dictionary[letter]
+            word_dictionary[letter] = value - 1
+    return sum(word_dictionary.values()) == 0
 
 def score_word(word):
     pass
