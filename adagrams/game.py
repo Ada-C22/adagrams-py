@@ -1,6 +1,5 @@
 from string import ascii_uppercase
-from random import choice
-
+from random import randint
 
 
 
@@ -36,7 +35,7 @@ def draw_letters():
     hand = []
 
     while len(hand) < 10:
-        pick = choice(ascii_uppercase)
+        pick = ascii_uppercase[randint(0, len(ascii_uppercase)-1)]
         if letter_pool[pick] > 0:
             hand.append(pick)
             letter_pool[pick] -= 1
@@ -95,5 +94,3 @@ def get_highest_word_score(word_list):
 
     return (winner_word, highest_score)
 
-print(draw_letters())
-print(uses_available_letters("sausage", list("sausage".upper() + "QWE")))
