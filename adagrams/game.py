@@ -129,57 +129,19 @@ def get_highest_word_score(word_list):
         # empty high_score dict so I can iterate over it later
         high_score_dict = {}
 
-        # put together dictionary of high scores to compare again
+        # put together dictionary of high scores to compare
         for i in range(0, len(high_score),2):
             word = high_score[i]
             score = high_score[i+1]
             high_score_dict[word] = score
 
-        # iterate through dict to check for tiebreaker rules first if length is 10
+        # loop through to check for a word that has length 10 and return high score
         for word,score in high_score_dict.items():
             if len(word) == 10:
-                high_score = word, score
-                return high_score
+                return word,score
             
-        # otherwise continue down from shortest to longest
-        # elif statements within one for loop seeemed to just replace one another 
-        # instead of stop and return, theres probably a better way to do it
-        for word,score in high_score_dict.items():
-            if len(word) == 2:
-                high_score = word, score
-                return high_score
-            
-        for word,score in high_score_dict.items():
-            if len(word) == 3:
-                high_score = word, score
-                return high_score
-            
-        for word,score in high_score_dict.items():
-            if len(word) == 4:
-                high_score = word, score
-                return high_score
-            
-        for word,score in high_score_dict.items():
-            if len(word) == 5:
-                high_score = word, score
-                return high_score
-            
-        for word,score in high_score_dict.items():
-            if len(word) == 6:
-                high_score = word, score
-                return high_score
-            
-        for word,score in high_score_dict.items():
-            if len(word) == 7:
-                high_score = word, score
-                return high_score
-            
-        for word,score in high_score_dict.items():
-            if len(word) == 8:
-                high_score = word, score
-                return high_score
-            
-        for word,score in high_score_dict.items():
-            if len(word) == 9:
-                high_score = word, score
-                return high_score
+        # then if no words with length 10 then loop for length in range 2-9 and return high score
+        for length in range(2,10):
+            for word,score in high_score_dict.items():
+                if len(word) == length:
+                    return word,score
