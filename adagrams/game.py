@@ -9,7 +9,7 @@ def draw_letters():
     for i in range(NUM_TILES):
         # update the last index of the remaining pool list that changes everytime
         # random.randint stop is inclusive, so -1 which reflect the size of the pool
-        index = len(LIST_OF_LETTERS)-1
+        index = len(letters_remaining_pool)-1
         # pop() allows to return the letter that was taken out and update the remaining pool list
         letter_grabbed = letters_remaining_pool.pop(random.randint(0,index))
         letters_grabbed.append(letter_grabbed)
