@@ -40,13 +40,13 @@ LETTER_POINTS = {
 
 def draw_letters():
     letter_pool = LETTER_POOL.copy()
-    letter_pool_keys = list(LETTER_POOL.keys())
+    letters = list(letter_pool.keys())
 
     chosen_letters = []
  
-    while len(chosen_letters) != 10:
-        random_num = random.randint(0,25)
-        random_letter = letter_pool_keys[random_num]
+    while len(chosen_letters) < 10:
+        random_index = random.randint(0,25)
+        random_letter = letters[random_index]
 
         if not letter_pool[random_letter]:
             continue
@@ -66,6 +66,7 @@ def uses_available_letters(word, letter_bank):
     for letter in letter_bank:
         if letter in available_letters_dict.keys():
             available_letters_dict[letter] += 1
+            continue
         
         available_letters_dict[letter] = 1
 
