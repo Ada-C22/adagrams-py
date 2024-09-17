@@ -78,8 +78,8 @@ def wave_4_run_game():
         played_words.append(user_input_word)
 
         display_retry_instructions()
-        continue_input = input()
-        game_continue = continue_input == "y"
+        continue_input =input()
+        game_continue = continue_input.lower() == "y"
     display_highest_score(get_highest_word_score(played_words))
     display_goodbye_message()
 
