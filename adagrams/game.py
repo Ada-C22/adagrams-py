@@ -86,11 +86,13 @@ def uses_available_letters(word, letter_bank):
     word_alpha_list = []
     letter_bank_copy = letter_bank.copy()
 
+    ## for loop: iteration through letter_bank_copy and popping out letter that appears in our hand to keep track of the letter frequency and how many times we can draw it
     for letter in word:
         if letter in letter_bank_copy:
             popped_letter = letter_bank_copy.pop(letter_bank_copy.index(letter))
             word_alpha_list.append(popped_letter)
             
+    ## checks for if the word guessed is using letters from inside our drawn hand (word_alpha_list)
     if len(word_alpha_list) == len(word):
             return True
 
@@ -108,6 +110,8 @@ def score_word(word):
     BONUS_POINTS = 8
     points = 0
 
+    ## for loop: iteration through each letter in the guessed word for a score. the guessed word is forced to be uppercase to be able to score the letter.
+
     for letter in word.upper():
         points += SCORE_CHART[letter]
 
@@ -121,6 +125,7 @@ def get_highest_word_score(word_list):
     highest_word = word_list[0]
     highest_score = score_word(word_list[0])
 
+    ## scores word from first index to the end of the word_list, to compare against the word and score from index 0
     for word in word_list[1::]:
         current_score = score_word(word)
     
