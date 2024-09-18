@@ -28,28 +28,46 @@ LETTER_POOL = {
     'Z': 1
 }
 
+SCORE_CHART = {
+    1 : ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2 : ["D", "G"],
+    3 : ["B", "C", "M", "P"],
+    4 : ["F", "H", "V", "W", "Y"],
+    5 : ["K"],
+    8 : ["J", "X"],
+    10 : ["Q", "Z"]
+}    
 def draw_letters():
     letter_pool = []
     for letter, count in LETTER_POOL.items():
         for _ in range(count):
             letter_pool.append(letter)
-    print(len(letter_pool))
-    hand = []
-    while len(hand) < 10:
+
+    hand_of_letters = []
+    while len(hand_of_letters) < 10:
         letter_index = random.randint(0, len(letter_pool)-1)
-        hand.append(letter_pool[letter_index])
+        hand_of_letters.append(letter_pool[letter_index])
         letter_pool.pop(letter_index)
-    return hand
+    return hand_of_letters
 
 draw_letters()
 
-
-
 def uses_available_letters(word, letter_bank):
-    pass
+    capitalized_word = word.upper()
+    letter_bank_copy = list(letter_bank)
+    for letter in capitalized_word:
+        if not letter in letter_bank_copy:
+            return False
+        else:
+            letter_bank_copy.remove(letter)
+    return True
+
+
 
 def score_word(word):
-    pass
+
+    
+
 
 def get_highest_word_score(word_list):
     pass
