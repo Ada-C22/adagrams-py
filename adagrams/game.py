@@ -25,8 +25,8 @@ def draw_letters():
 
 def uses_available_letters(word, letter_bank):
     '''
-    Determines if a given word to see if it can be spelled using only
-    letters from the letter bank.
+    Determines if a given word can be spelled using only letters from
+    the letter bank.
 
     Checks whether each letter in the word is found in the letter bank,
     removing letters as they are found.
