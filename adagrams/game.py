@@ -45,6 +45,18 @@ def create_letter_pool_list():
     letter_pool_list = [letter for letter, freq in LETTER_POOL.items() for _ in range(freq)]
     return letter_pool_list 
 
+def draw_letters():
+    '''returns a list of 10 random letters from LetterPool'''
+    letter_pool_list = create_letter_pool_list()
+    letter_bank = []
+
+    for _ in range(10): 
+        random_num = random.randint(0, len(letter_pool_list) -1)
+        letter = letter_pool_list[random_num] 
+        letter_bank.append(letter)
+        letter_pool_list.pop(random_num)      
+    return letter_bank
+
 def count_letters(list_or_str, letter):
     '''returns the count of a letter in a str or list'''
     count = 0
@@ -53,22 +65,6 @@ def count_letters(list_or_str, letter):
             count += 1
     return count
 
-def draw_letters():
-    '''returns a list of 10 random letters from LetterPool'''
-    letter_pool_list = create_letter_pool_list()
-    letter_bank = []
-
-    while len(letter_bank) < 10: 
-        random_num = random.randint(0, len(letter_pool_list) -1)
-        letter = letter_pool_list[random_num] 
-        letter_count = count_letters(letter_bank, letter) 
-        
-        if letter_count >= LETTER_POOL[letter]:
-            continue 
-        letter_bank.append(letter)
-            
-    return letter_bank
-
 def uses_available_letters(word, letter_bank):
     '''returns true if the word uses available letters'''
     word = word.upper()
@@ -76,12 +72,13 @@ def uses_available_letters(word, letter_bank):
     for letter in word: 
         letter_in_word_count = count_letters(word, letter) 
         letter_in_bank_count = count_letters(letter_bank, letter)
+                
         if letter_in_word_count > letter_in_bank_count:
             is_valid_word = False
         elif letter not in letter_bank:
             is_valid_word = False
-    return is_valid_word
 
+    return is_valid_word
 
 def score_word(word):
     '''returns the score of the word'''
