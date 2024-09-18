@@ -1,6 +1,10 @@
 import random
 
-LETTER_POOL = {
+def draw_letters():
+    """
+    Output: returns 10 random letter tiles based on LETTER_POOL dictionary
+    """
+    LETTER_POOL = {
     'A': 9, 
     'B': 2, 
     'C': 2, 
@@ -27,17 +31,17 @@ LETTER_POOL = {
     'X': 1, 
     'Y': 2, 
     'Z': 1
-}
+    }
 
-def draw_letters():
     letters_available = []
     letters_drawn = []
+    num_letter_tiles = 10
 
     for letter, quantity in LETTER_POOL.items():
         for i in range(quantity):
             letters_available.append(letter)
     
-    for i in range(10):
+    for i in range(num_letter_tiles):
         random_number = random.randint(0, len(letters_available) - 1)
         letters_drawn.append(letters_available[random_number])
         letters_available.pop(random_number)
@@ -45,9 +49,12 @@ def draw_letters():
     return letters_drawn
 
 def uses_available_letters(word, letter_bank):
+    """
+    Input: word (str), letter_bank (list of strings)
+    Output: bool for whether available letters were used
+    """
     word = word.upper()
     letter_bank_dict = {}
-    letter_count = 0
 
     for letter in letter_bank:
         if letter not in letter_bank_dict.keys():
@@ -56,7 +63,7 @@ def uses_available_letters(word, letter_bank):
             letter_bank_dict[letter] += 1
 
     for letter in word:
-        if letter not in letter_bank_dict.keys() or letter_bank_dict[letter] == 0:
+        if letter not in letter_bank_dict.keys() or not letter_bank_dict[letter]:
             return False
         else:
             letter_bank_dict[letter] -= 1
@@ -64,7 +71,11 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
-    score_chart = {
+    """
+    Input: word (str)
+    Output: score (int) based on SCORE_CHART dictionary
+    """
+    SCORE_CHART = {
         'A': 1, 
         'B': 3, 
         'C': 3, 
@@ -96,7 +107,7 @@ def score_word(word):
     word = word.upper()
 
     for letter in word:
-        score += score_chart[letter]
+        score += SCORE_CHART[letter]
 
     if 7 <= len(word) <= 10:
         score += 8
@@ -104,6 +115,10 @@ def score_word(word):
     return score
 
 def get_highest_word_score(word_list):
+    """
+    Input: word_list (list of strings)
+    Output: tuple of highest_word (str) and highest_score (int) for highest scoring word and its score
+    """
     highest_score = 0
     highest_word = ""
 
@@ -114,9 +129,7 @@ def get_highest_word_score(word_list):
             highest_score = score
             highest_word = word
         elif score == highest_score:
-            if len(highest_word) == 10 :
-                continue
-            elif len(word) == 10 or len(word) < len(highest_word):
+            if len(highest_word) != 10 and (len(word) == 10 or len(word) < len(highest_word)):
                 highest_word = word
-    
+
     return highest_word, highest_score
