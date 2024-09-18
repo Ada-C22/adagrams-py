@@ -38,18 +38,17 @@ SCORE_CHART = {
     ('J', 'X'): 8,
     ('Q', 'Z'): 10
 }
+
+
 def create_letter_pool_list():
     '''returns a total list of letters from LetterPool'''
-    letter_pool_list = []
-    for letter, freq in LETTER_POOL.items():
-        for i in range(freq):
-            letter_pool_list.append(letter)
+    letter_pool_list = [letter for letter, freq in LETTER_POOL.items() for _ in range(freq)]
     return letter_pool_list 
 
-def count_letters(list, letter):
-    '''returns the count of a letter in a list'''
+def count_letters(list_or_str, letter):
+    '''returns the count of a letter in a str or list'''
     count = 0
-    for item in list:
+    for item in list_or_str:
         if item == letter:
             count += 1
     return count
@@ -60,14 +59,13 @@ def draw_letters():
     letter_bank = []
 
     while len(letter_bank) < 10: 
-        random_num = random.randint(0, 97)
+        random_num = random.randint(0, len(letter_pool_list) -1)
         letter = letter_pool_list[random_num] 
         letter_count = count_letters(letter_bank, letter) 
         
         if letter_count >= LETTER_POOL[letter]:
             continue 
-        else:
-            letter_bank.append(letter)
+        letter_bank.append(letter)
             
     return letter_bank
 
@@ -100,29 +98,26 @@ def score_word(word):
 def get_highest_word_score(word_list):
     '''returns the word with the highest score from word_list'''
     winning_word = ""
-    word_len = len(word_list[-1])
     max_score = score_word(word_list[-1])
         
     for word in word_list: 
-
-        if score_word(word) > max_score: 
-            max_score = score_word(word)
+        if not winning_word: 
             winning_word = word
+            max_score = score_word(word)
+        elif score_word(word) > max_score: 
+            winning_word = word
+            max_score = score_word(word)
         elif score_word(word) == max_score:
+            if len(winning_word) == 10:
+                break 
             if len(word) == 10:
+                winning_word = word
+                max_score = score_word(word)
+            elif len(word) < len(winning_word):
                 max_score = score_word(word)
                 winning_word = word
-                word_len = len(word) 
-                break
-            elif len(word) == word_len:
-                max_score = score_word(word)
-                winning_word = word
-                word_len = len(word)
-            elif len(word) < word_len:
-                max_score = score_word(word)
-                winning_word = word
-                word_len = len(word)                     
+                
 
     return winning_word, max_score
 
-print(get_highest_word_score(["AAAAAAAAAA", "BBBBBB"]))
+
