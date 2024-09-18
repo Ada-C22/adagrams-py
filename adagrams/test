@@ -1,0 +1,32 @@
+def score_word(word):
+
+    score_one_point = ["A","E","I","O","U","L","N","U","S","T"]
+    score_two_point =["D","G"]
+    score_three_point = ["B","C","M","P"]
+    score_four_point = ["F","H","V","W","Y"]
+    score_five_point = ["K"]
+    score_eight_point = ["J","X"]
+    score_ten_point = ["Q","Z"]
+    
+    score = 0
+
+    word = word.upper()
+    for letter in word: 
+        if letter in score_one_point:
+            score += 1
+        elif letter in score_two_point:
+            score += 2
+        elif letter in score_three_point:
+            score += 3
+        elif letter in score_four_point:
+            score += 4
+        elif letter in score_five_point:
+            score += 5
+        elif letter in score_eight_point:
+            score += 8
+        elif letter in score_ten_point: 
+            score += 10 
+            
+    print (score)
+
+score_word("WHImsY")
