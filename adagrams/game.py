@@ -60,8 +60,11 @@ draw_letters()
 
 
 def uses_available_letters(word, letter_bank):
-    pass
-            
+    for letter in word:
+        if letter in letter_bank:
+            return True
+        else:
+            return False
 
 
 def score_word(word):
