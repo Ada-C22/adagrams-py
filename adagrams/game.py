@@ -86,69 +86,33 @@ def score_word(word):
     
     return score
 
-words = ["MMMM", "WWW"]
+words = ["X", "XX", "XXX", "XXXX"]
 def get_highest_word_score(word_list):
     
     highest_value = 0
-    score_dict = {} # dict containing all words and scores
     highest_value_word = ""
-    highest_score_words = []
+    score_dict = {} # dict containing all words and scores
     word_length = 9
 
     for each_word in word_list:
         each_score = score_word(each_word) # assign score 
         if each_score >= highest_value:
-            highest_value = each_score
-            score_dict[each_word] = len(each_word)
-    
-    if len(score_dict) == 1:
-        highest_value_word = score_dict.keys()
-    else:
-        for each_key, each_value in score_dict.items():
-            if each_value == 10:
-                highest_value_word = each_key
-            elif each_value < word_length:
-                word_length = each_value
-                highest_value_word = each_key
+            if each_score > highest_value:
+                score_dict = {}
+                highest_value = each_score
+                score_dict[each_word] = len(each_word)
+            elif each_score == highest_value:
+                score_dict[each_word] = len(each_word)
 
-    print(highest_value_word)
-    #     if each_score > highest_value: # get the highest score and adds to highest_value
-    #         highest_value = each_score
+    for each_key, each_value in score_dict.items():
+        if each_value == 10:
+            highest_value_word = each_key
+            break
         
-    # for each_key, each_value in score_dict.items():
-    #     if each_value == highest_value:
-    #         highest_score_words.append(each_key)
-    #         len_list.append(len(each_key))
-    
-    # i = 0
-    # while i < len(len_list):
-    #     print(highest_score_words)
-
- 
-
-    # for each_key, each_value in highest_score_dict.items():
-    #     if len(each_key) == 10:
-    #         highest_value_word = each_key
-        
-
-    # print(highest_score_dict)
-
-    # print(highest_value_word)
-    
-    # word_list= []
-    # score_list = []
-    # for a_word, a_score in score_dict.items():
-    #     word_list.append(a_word)
-    #     score_list.append(a_score)
-    
-    
-    # for each_num in score_list:
-    #     if 
-
-
-    # print(word_list)
-    # print(score_list) 
-    
+        elif each_value < word_length:
+            word_length = each_value
+            highest_value_word = each_key
+            
     return highest_value_word, highest_value
 
 get_highest_word_score(words)
