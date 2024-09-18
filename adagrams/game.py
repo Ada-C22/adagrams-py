@@ -33,21 +33,21 @@ def draw_letters():
 
     final_string = []
     letters_frequency = []
-    letters_list = []
-    
-    for letters in LETTER_POOL:
-        letters_frequency.append(LETTER_POOL[letters])
     
 
-    for letter in LETTER_POOL:
-        letters_list.append(letter)
+    for letters, frequency in LETTER_POOL.items():
+        for i in range(frequency):
+            letters_frequency.append(letters)
+    
 
     while len(final_string) < 10:
-        letter_index = random.randint(0, len(LETTER_POOL) -1)
+        letter_index = random.randint(0, len(letters_frequency) -1)
 
-        if letters_frequency[letter_index] > 0:
-            letters_frequency[letter_index] -= 1
-            final_string.append(letters_list[letter_index])
+        if letters_frequency[letter_index] in final_string:
+            continue
+        elif letters_frequency[letter_index] not in final_string:
+            final_string.append(letters_frequency[letter_index])
+        
         
     return final_string
 
