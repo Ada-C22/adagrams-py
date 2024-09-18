@@ -60,30 +60,46 @@ score_chart = {
 
 def draw_letters():
     """
-    import random
-    build an array (a hand) of 10 string
-    a letter radomly draw from that pool
-        2 avaialble C, return no more than 
-        E can draw 12 times , Z considered 1 count
-    user returns their hand to the pool before drawing new letters
-    return 
+    Draws a hand of 10 letters from a predefined pool.
+    Returns:
+        list of str: A list of 10 letters randomly drawn from the pool.
+    Notes:
+        letters are drawn according to their frequency in the pool.
+        no letter will be drawn more times than its availability.
+        the letter pool remains unchanged after drawing.
     """
     draw_letters = []
+    letter_count = {}
+    letters = []
+        
+    for letter, count in letter_pool.items():
+        letters.extend([letter] * count)    
     
-    while len(draw_letters) < 10: #this loop will run until we have 10 letters in our hand
+    while len(draw_letters) < 10:    
+        letter_index = random.randint(0, len(letters)-1)
+        random_letter = letters[letter_index]
         
-        random_letters = random.choices(list(letter_pool.keys()), list(letter_pool.values()))
-        random_letter = random_letters[0]
+        if random_letter not in draw_letters:
+            letter_count[random_letter] = 0
         
-        letter_count = draw_letters.count(random_letter) 
-           
-        if letter_count < letter_pool[random_letter]: 
-            draw_letters.append(random_letter) 
+        if letter_count[random_letter] < letter_pool[random_letter]:
+            draw_letters.append(random_letter)
+            letter_count[random_letter] += 1
+            
+    return draw_letters     
+    
+draw_letters()
 
-                         
-    return draw_letters
-    
 def uses_available_letters(word, letter_bank):
+    """
+    Check if a word can be formed using the letters in letter bank
+    Parameters:
+        word(str)
+        letter_bank(list of str)
+    Return:
+        Bool: True if every letter in available in letter bank
+            False otherwise
+    """
     letter_bank_copy = letter_bank[:]
     word = word.upper()
     
@@ -96,10 +112,11 @@ def uses_available_letters(word, letter_bank):
 
 def score_word(word):
     """
-    create a dictionary to have key (letter) value(score) pair
-    input: "str"
-            if len(word) in rang(7,11) -> word += 8
-    return int sum up of points of letters
+    Create a dictionary to have key (letter) value(score) pair
+    Parameters:
+        word(str)
+    Return:
+        int: the total score of the word
     """
     total_score = 0
     word = word.upper()
@@ -117,13 +134,15 @@ def score_word(word):
 
 def get_highest_word_score(word_list):
     """
-    input : list of strings
-    returns : tuple (a str, score)
-    two words have the same score,
-    pick the word with fewer letters.
-    one of the tied words has exactly 10 letters, 
-    pick that word.
-    pick the word that appeared first in the list.
+    Parameter:
+        word_list(list of strings)
+    returns : 
+        tuple:
+            highest score(str), the score(int)
+    Notes:
+        pick the word with fewer letters.
+        one of the tied words has exactly 10 letters.
+        pick the word that appeared first in the list.
     """
     
     best_word = ""
@@ -131,15 +150,14 @@ def get_highest_word_score(word_list):
     
     for word in word_list:
         score = score_word(word)
-        # print(f"checking {word} , {score}")
         
         if score > best_score:
             best_word = word
             best_score = score
-            # print(best_word, best_score)
+            
         elif score == best_score:
             if len(word) < len(best_word) and len(best_word) != 10:
-                best_word = word #update word with few letters but same score
+                best_word = word 
             elif len(word) == 10 and len(best_word) != 10:
                 best_word = word
     
