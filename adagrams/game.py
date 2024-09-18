@@ -56,17 +56,21 @@ def draw_letters():
             continue
     return hand
 
-draw_letters()
-
+letters = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"]
+word = "DOG"
 
 def uses_available_letters(word, letter_bank):
+    word = word.upper()
+    count = 0
     for letter in word:
         if word.count(letter) > letter_bank.count(letter):
             return False
         elif letter in letter_bank:
-            return True
-        
+            count += 1
+    if count == len(word):
+        return True
 
+uses_available_letters(word, letters)
 
 def score_word(word):
     pass
