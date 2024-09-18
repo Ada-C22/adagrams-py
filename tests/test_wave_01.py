@@ -64,9 +64,8 @@ def test_letter_not_selected_too_many_times():
         
         # Assert
         for letter in letters:
-            assert letter_freq[letter] <= LETTER_POOL[letter], f"Failed at iteration {i}, {letter} = {letter_freq[letter]} and pool = {LETTER_POOL[letter]}" 
+            assert letter_freq[letter] <= LETTER_POOL[letter] 
 
-# @pytest.mark.skip("remove this line when working on filter_to_better_than_average_sales")
 def test_draw_letters_returns_different_hands():
     # Arrange/Act
     hand1 = draw_letters()
