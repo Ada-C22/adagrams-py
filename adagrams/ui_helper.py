@@ -28,3 +28,4 @@ def display_goodbye_message():
 def display_highest_score(word_score):
     print("Thanks for playing Adagrams!")
     print(f"The highest score from this game was {word_score[0]}, which was worth {word_score[1]} points.")
+    
