@@ -102,21 +102,4 @@ def get_highest_word_score(word_list):
                     best_word = score_word_tuple[i]
 
     return best_word
-
-                 
-
-
-#create a bank for word scores called score_list
-#run through each number in the list and determine largest value 
-#create a tuple where index zero is the word and index 1 is the score
-#if there are 2 words with the same score then choose shorter word 
-        
-        #index 0 string, index 1 score of word 
    
-
-
-
- 
-
-def test_letter_not_selected_too_many_times():
-    pass    
