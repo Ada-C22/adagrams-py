@@ -1,7 +1,7 @@
 
-import random
+from random import randint
 from .data import LETTER_POOL
-
+from .score_chart import score_of_letters
 # wave 1
 def draw_letters():
     
@@ -20,14 +20,17 @@ def draw_letters():
         if not avaiable_letters:
             break
         # chose a random letter for avail letters
-        choose_letter = random.choice(avaiable_letters)
-    
-        # add the chosen letter to our hand
+        # my randon index generates a randon int between 0 and last index of availabe letters
+        index = randint(0, len(avaiable_letters) -1)
+        choose_letter = avaiable_letters[index]
+        # decreases the count of the choosen letters 
+        letter_counts[choose_letter] -= 1
+        # this adds the choose letter to the hand list above 
         hand.append(choose_letter)
         # decrease the count of chose letter
-        letter_counts[choose_letter] -=1
+        
     # convert letter to str
-    return ''.join(hand)       
+    return ''.join(hand)      
         
  # wave 2 
                         
@@ -63,8 +66,41 @@ def uses_available_letters(word, letter_bank):
     return True
     
 def score_word(word):
-    pass
+   # if the word has zero point the ret
+    if not word:
+        return 0
     
+    # initialze variable to hold the total score
+    total_score = 0
+    # need to catch if user types lower case
+    word = word.upper()
+    
+    # loop over the letters in the word
+    for letter in word:
+        # find the letter in the score_of_letters dict
+        if letter.upper() in score_of_letters:
+            # each letter value = looks at the score_of_letter in the dict and finds the number that is assocated to that letter
+            letter_score =  score_of_letters[letter.upper()]
+            # add to get total score
+            total_score += letter_score
+    # bonus, if there are 7 or more letters in the word then add 8 points to the total       
+    if len(word) >= 7 :
+        total_score += 8
+            
+    return total_score
+
+
+# find highest score word
+# from parm word_list is a list of str
+# return tuple that represents the winning word
+# tuple must have:
+#   index 0 ([0]): a string of a word
+#   index 1 ([1]): the score of the work
+# for words that tie use tie break
+#   word with fewest letter wins unless 10 letter
+#   if top score is tied between multipul words and one is 10 letters long chose the 10 letter one over the other
+# if all wors are the same score and lenth , pick the first one in the list
+# 
 def get_highest_word_score(word_list):
     pass
 
