@@ -38,25 +38,31 @@ def draw_letters():
         for value in range(LETTER_POOL[letter]):
             letters_list.append(letter)
 
-    print(f"len(letters_list) before = {len(letters_list)}")
-    print(f"letters_list before = {letters_list}")
 
     while count < 10:
-        random_letter_index = random.randint(0, len(letters_list))
+        random_letter_index = random.randint(0, len(letters_list) - 1)
         letters_in_hand.append(letters_list[random_letter_index])
         letters_list.pop(random_letter_index)
         count += 1
 
-    print(f"len(letters_list) after = {len(letters_list)}")
-    print(f"letters_list after = {letters_list}")
-    print(f"letters_in_hand = {letters_in_hand}")
 
     return letters_in_hand
-      
    
 
 def uses_available_letters(word, letter_bank):
-    pass
+   
+    word_upper = word.upper()
+
+    letter_bank_copy = letter_bank[:]
+
+    for letter in word_upper:
+        if letter not in letter_bank_copy:
+            return False
+        else:
+            letter_bank_copy.remove(letter)
+    
+    return True
+
 
 def score_word(word):
     pass
