@@ -7,7 +7,7 @@ def test_get_highest_word_score_accurate():
     words = ["X", "XX", "XXX", "XXXX"]
 
     # Act
-    best_word = get_highest_word_score(words)
+    best_word = get_highest_word_score(word_list=words)
     # NOTE: best_word can be a tuple or a list
 
     # Assert
