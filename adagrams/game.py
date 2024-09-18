@@ -2,7 +2,7 @@ import random
 
 def draw_letters():
     """
-    Output: returns 10 random letter tiles based on LETTER_POOL dictionary
+    Output: list of 10 random letter tiles based on LETTER_POOL dictionary
     """
     LETTER_POOL = {
     'A': 9, 
