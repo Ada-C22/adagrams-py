@@ -97,4 +97,29 @@ def score_word(word):
 
 
 def get_highest_word_score(word_list):
-    pass
+    score_max = 0
+    word_min = "ZZZZZZZZZZZZZZZZZ"
+    words_list_pos_win = []
+
+    for word in word_list:
+        words_score = (score_word(word))
+
+        if words_score > score_max:
+            score_max = words_score
+
+    for word in word_list:
+        words_score = (score_word(word))
+        if score_max == words_score:
+            words_list_pos_win.append(word)
+    if len(words_list_pos_win) == 1:
+        return(words_list_pos_win[0], score_max)
+    for word in words_list_pos_win:
+        if len(word) == 10:
+            return(word, score_max)
+        if len(word) < len(word_min):
+            word_min = word
+    return(word_min, score_max)
+
+        
+    
+
