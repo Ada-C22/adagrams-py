@@ -28,6 +28,15 @@ LETTER_POOL = {
     26: {'Z': 1}
 }
 
+SCORE_CHART = {
+    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2: ['D', 'G'],
+    3: ['B', 'C', 'M', 'P'],
+    4: ['F', 'H', 'V', 'W', 'Y'],
+    5: ['K'],
+    8: ['J', 'X'],
+    10: ['Q', 'Z']
+    }
 
 def deep_copy_letter_pool(letter_pool):
     letter_pool_copy = {}
@@ -73,20 +82,7 @@ def uses_available_letters(word, letter_bank):
     return True
 
 
-
-
-
 def score_word(word):
-
-    SCORE_CHART = {
-        1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-        2: ['D', 'G'],
-        3: ['B', 'C', 'M', 'P'],
-        4: ['F', 'H', 'V', 'W', 'Y'],
-        5: ['K'],
-        8: ['J', 'X'],
-        10: ['Q', 'Z']
-    }
 
     word = word.upper()
     total_score = 0
@@ -99,6 +95,47 @@ def score_word(word):
                 total_score += score
     return total_score
 
+def word_score_list(word_list):
+    score_chart = []
+    for word in word_list:
+        word_score = score_word(word)
+        score_chart += [word_score]
+    return score_chart
+
 
 def get_highest_word_score(word_list):
-    pass
+   
+    winning_word = None
+    score_chart = word_score_list(word_list)
+    highest_score = score_chart[0]
+
+    for i in range(len(word_list)):
+        if not winning_word:
+            winning_word = word_list[i]
+        elif score_chart[i] > highest_score:
+            winning_word = word_list[i]
+            highest_score = score_chart[i]
+        elif score_chart[i] == highest_score:
+            if len(word_list[i]) == 10 and len(winning_word) != 10:
+                winning_word = word_list[i]
+            elif len(winning_word) != 10 and len(word_list[i]) < len(winning_word):
+                winning_word = word_list[i]
+    return winning_word, highest_score
+    
+
+
+
+
+
+
+
+    
+            
+        
+
+        
+    
+
+                                         
+
+        
