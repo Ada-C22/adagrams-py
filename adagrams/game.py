@@ -54,7 +54,7 @@ def draw_letters():
         random_num = random.randint(0, len(letter_pool_list) -1)
         letter = letter_pool_list[random_num] 
         letter_bank.append(letter)
-        letter_pool_list.pop(letter)      
+        letter_pool_list.pop(random_num)      
     return letter_bank
 
 def count_letters(list_or_str, letter):
