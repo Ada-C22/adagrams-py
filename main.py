@@ -9,11 +9,10 @@ def wave_1_run_game():
         print("Let's draw 10 letters from the letter pool...")
         letter_bank = draw_letters()
         display_drawn_letters(letter_bank)
-    
         display_retry_instructions()
         continue_input = input()
         game_continue = continue_input == "y"
-   
+        
     display_goodbye_message()
 
 def wave_2_run_game():
