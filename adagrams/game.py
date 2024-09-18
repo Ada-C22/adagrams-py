@@ -28,15 +28,7 @@ LETTER_POOL = {
     'Z': 1
 }
 
-SCORE_CHART = {
-    1 : ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
-    2 : ["D", "G"],
-    3 : ["B", "C", "M", "P"],
-    4 : ["F", "H", "V", "W", "Y"],
-    5 : ["K"],
-    8 : ["J", "X"],
-    10 : ["Q", "Z"]
-}    
+
 def draw_letters():
     letter_pool = []
     for letter, count in LETTER_POOL.items():
@@ -62,12 +54,26 @@ def uses_available_letters(word, letter_bank):
             letter_bank_copy.remove(letter)
     return True
 
-
-
 def score_word(word):
-
-    
+    score_chart = {
+    1 : ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2 : ["D", "G"],
+    3 : ["B", "C", "M", "P"],
+    4 : ["F", "H", "V", "W", "Y"],
+    5 : ["K"],
+    8 : ["J", "X"],
+    10 : ["Q", "Z"]
+}    
+    capitalized_word = word.upper()
+    total_score = 0
+    for letter in capitalized_word:
+        for score, letters in score_chart.items():
+            if letter in letters:
+                total_score += score
+    if 7 <= len(capitalized_word) <= 10:
+        total_score += 8
+    return total_score
 
 
 def get_highest_word_score(word_list):
-    pass
+    pass    
