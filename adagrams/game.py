@@ -86,6 +86,25 @@ def score_word(word):
     
     return score
 
-
+words = ["X", "XX", "XXX", "XXXX"]
 def get_highest_word_score(word_list):
-    pass
+    
+    score_dict = {}
+    highest_value = 0
+    highest_value_word = ""
+
+    for each_word in word_list:
+        score = score_word(each_word)
+        score_dict[each_word] = score
+        if score > highest_value:
+            highest_value = score
+            highest_value_word = each_word
+
+    print(highest_value_word)
+    print(highest_value)
+    return highest_value_word, highest_value
+
+    # for each_word, each_value in score_dict.items():
+    #     for each in each_value:
+
+get_highest_word_score(words)
