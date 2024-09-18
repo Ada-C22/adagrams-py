@@ -86,14 +86,14 @@ def score_word(word):
     
     return score
 
-words = ["JQ", "FHQ", "AAAAAAAAAA", "BBBBBB", "TTTTTTTTTT"]
+words = ["MMMM", "WWW"]
 def get_highest_word_score(word_list):
     
     highest_value = 0
     score_dict = {} # dict containing all words and scores
     highest_value_word = ""
     highest_score_words = []
-    word_length = 0
+    word_length = 9
 
     for each_word in word_list:
         each_score = score_word(each_word) # assign score 
@@ -101,16 +101,17 @@ def get_highest_word_score(word_list):
             highest_value = each_score
             score_dict[each_word] = len(each_word)
     
-    for each_key, each_value in score_dict.items():
-        if len(score_dict) == 1:
-            highest_value_word = each_key
-            break
-        elif each_value == 10:
-            highest_value_word = each_key
-        
+    if len(score_dict) == 1:
+        highest_value_word = score_dict.keys()
+    else:
+        for each_key, each_value in score_dict.items():
+            if each_value == 10:
+                highest_value_word = each_key
+            elif each_value < word_length:
+                word_length = each_value
+                highest_value_word = each_key
 
-    
-    
+    print(highest_value_word)
     #     if each_score > highest_value: # get the highest score and adds to highest_value
     #         highest_value = each_score
         
