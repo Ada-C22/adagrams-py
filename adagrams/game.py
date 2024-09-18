@@ -74,7 +74,7 @@ def score_word(word):
         8: ['J', 'X'],
         10: ['Q', 'Z']
     }
-
+    word = word.upper()
     score = 0
     for letter in word:
         for point_value, letter_list in score_chart.items():
