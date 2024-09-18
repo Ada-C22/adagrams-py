@@ -35,10 +35,8 @@ def draw_letters():
     build an array (a hand) of 10 string
     a letter randomly draw from that pool
     """ 
-
-    # generates a position for letter
     
-    # convert letter pool into lists
+    # give variable names to the letters and max usage num 
     letter_list, usage_list = list(letter_pool.keys()), list(letter_pool.values())
     
     # generate a random letter
@@ -46,18 +44,14 @@ def draw_letters():
     
     while len(hand) < 10:
         position = random.randint(0, len(letter_list)-1)
-        letter_frequency = usage_list[position]
-        random_letter = letter_list[position]
+        letter_frequency = usage_list[position] # assigns the random int to a usage number
+        random_letter = letter_list[position] # assigns the random int to a letter
         
         if hand.count(random_letter) < letter_frequency:
             add_letter = hand.append(random_letter)
-            # print(f"{hand.count(random_letter)}, {random_letter}")
         else:
             continue
     return hand
-
-letters = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"]
-word = "DOG"
 
 def uses_available_letters(word, letter_bank):
     word = word.upper()
@@ -70,10 +64,27 @@ def uses_available_letters(word, letter_bank):
     if count == len(word):
         return True
 
-uses_available_letters(word, letters)
-
 def score_word(word):
-    pass
+    score_chart = {
+        1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+        2: ['D', 'G'],
+        3: ['B', 'C', 'M', 'P'],
+        4: ['F', 'H', 'V', 'W', 'Y'],
+        5: ['K'],
+        8: ['J', 'X'],
+        10: ['Q', 'Z']
+    }
+
+    score = 0
+    for letter in word:
+        for point_value, letter_list in score_chart.items():
+            if letter in letter_list:
+                score += point_value
+
+    if len(word) > 6:
+        score += 8
+    
+    return score
 
 
 def get_highest_word_score(word_list):
