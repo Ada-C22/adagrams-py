@@ -11,8 +11,8 @@ def draw_letters():
     all_available_let = []
     current_hand = []
 
-    for letter, letter_frequency in LETTER_POOL.items():
-        for letter_index in range(letter_frequency):
+    for letter, original_letter_count in LETTER_POOL.items():
+        for letter_index in range(original_letter_count):
             all_available_let.append(letter)
 
     while len(current_hand) < MAX_HAND_COUNT:
