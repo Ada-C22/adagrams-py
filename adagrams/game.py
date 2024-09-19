@@ -106,4 +106,33 @@ def score_word(word):
 
 
 def get_highest_word_score(word_list):
-    pass
+    max_score = 0
+    win_word_list = []
+
+    for word in word_list:
+        score = score_word(word)
+
+        if score > max_score:
+            max_score = score
+            win_word_list.clear()
+            win_word_list.append(word)
+        elif score == max_score:
+            win_word_list.append(word)
+
+    if len(win_word_list) == 1:
+        return win_word_list[0], max_score
+
+    for win_word in win_word_list:
+        if len(win_word) == 10:
+            return win_word, max_score
+
+    min_length = 10
+    win_word_with_min_length = ""
+
+    for win_word in win_word_list:
+        win_word_length = len(win_word)
+        if win_word_length < min_length:
+            min_length = win_word_length
+            win_word_with_min_length = win_word
+
+    return win_word_with_min_length, max_score
