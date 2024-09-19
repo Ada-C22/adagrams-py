@@ -72,11 +72,28 @@ def uses_available_letters(word, letter_bank):
 # Each letter within word has a point value. The number of points of each letter is summed up to represent the total score of word
 # Each letter's point value is described in the table below
 # If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
+
+
+score_chart = {'A':1, 'E':1, 'I':1, 'O': 1, 'U':1, 'L':1, 'N':1, 'R':1, 'S':1,
+               'T':1, 'D':2, 'G':2, 'B':3, 'C':3, 'M':3, 'P':3, 'F':4, 'H':4,
+               'V':4, 'W':4, 'Y':4, 'k':5, 'J':8, 'X':8, 'Q':10, 'Z':10}
 def score_word(word):
-    pass
+
+    score_list= []
+    for char in word.upper():
+        if char in score_chart.keys():
+            score_list.append(score_chart[char])
+    total_score = sum(score_list)
+# If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
+    if len(word) >= 7:
+        total_score = total_score + 8
+
+    return total_score
+
 
 
 
 
 def get_highest_word_score(word_list):
-    pass
+    for word in word_list:
+        score = score_word(word)
