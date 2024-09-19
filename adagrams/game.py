@@ -28,6 +28,15 @@ LETTER_POOL = {
     'Z': 1
 }
 
+SCORE_CHART = {
+    1 : ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2 : ["D", "G"],
+    3 : ["B", "C", "M", "P"],
+    4 : ["F", "H", "V", "W", "Y"],
+    5 : ["K"],
+    8 : ["J", "X"],
+    10 : ["Q", "Z"]
+}    
 
 def draw_letters():
     letter_pool = []
@@ -45,35 +54,53 @@ def draw_letters():
 draw_letters()
 
 def uses_available_letters(word, letter_bank):
+
     capitalized_word = word.upper()
     letter_bank_copy = list(letter_bank)
+
     for letter in capitalized_word:
         if not letter in letter_bank_copy:
             return False
         else:
             letter_bank_copy.remove(letter)
+
     return True
 
 def score_word(word):
-    score_chart = {
-    1 : ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
-    2 : ["D", "G"],
-    3 : ["B", "C", "M", "P"],
-    4 : ["F", "H", "V", "W", "Y"],
-    5 : ["K"],
-    8 : ["J", "X"],
-    10 : ["Q", "Z"]
-}    
+
     capitalized_word = word.upper()
     total_score = 0
+
     for letter in capitalized_word:
-        for score, letters in score_chart.items():
+        for score, letters in SCORE_CHART.items():
             if letter in letters:
                 total_score += score
+
     if 7 <= len(capitalized_word) <= 10:
         total_score += 8
+
     return total_score
 
 
 def get_highest_word_score(word_list):
-    pass    
+
+    highest_score = 0
+    best_word = []
+
+    for word in word_list :
+        score = score_word(word)
+        if score > highest_score:
+            highest_score = score
+            best_word = [word, score]
+        elif score == highest_score:
+            if len(word) == 10 and len(best_word[0]) != 10:
+                best_word = [word, score]
+            elif len(word) < len(best_word[0]) and len(best_word[0]) != 10:
+                best_word = [word, score]
+            elif len(word) == len(best_word[0]):
+                continue
+    
+    return tuple(best_word)
+
+
+
