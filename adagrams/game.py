@@ -29,16 +29,7 @@ letter_counts = {
     'Z': 1
 }
 
-# No parameters
-# Returns an array of ten strings
-# Each string should contain exactly one letter
-# These represent the hand of letters that the player has drawn
-# The letters should be randomly drawn from a pool of letters
-# This letter pool should reflect the distribution of letters as described in the table below
-# There are only 2 available C letters, so draw_letters cannot ever return more than 2 Cs
-# Since there are 12 Es but only 1 Z, it should be 12 times as likely for the user to draw an E as a Z
-# Invoking this function should not change the pool of letters
-# Imagine that the user returns their hand to the pool before drawing new letters
+
 def draw_letters():
     all_letters = []
     hand= []
@@ -62,16 +53,7 @@ def uses_available_letters(word, letter_bank):
     return True
 
 
-# Wave 3: score_word
-# Now you need a function returns the score of a given word as defined by the Adagrams game.
-#
-# Implement the function score_word in game.py. This method should have the following properties:
-#
-# Has one parameter: word, which is a string of characters
-# Returns an integer representing the number of points
-# Each letter within word has a point value. The number of points of each letter is summed up to represent the total score of word
-# Each letter's point value is described in the table below
-# If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
+
 
 
 score_chart = {'A':1, 'E':1, 'I':1, 'O': 1, 'U':1, 'L':1, 'N':1, 'R':1, 'S':1,
@@ -84,7 +66,6 @@ def score_word(word):
         if char in score_chart.keys():
             score_list.append(score_chart[char])
     total_score = sum(score_list)
-# If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
     if len(word) >= 7:
         total_score = total_score + 8
 
@@ -97,3 +78,4 @@ def score_word(word):
 def get_highest_word_score(word_list):
     for word in word_list:
         score = score_word(word)
+
