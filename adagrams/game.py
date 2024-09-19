@@ -1,6 +1,4 @@
 import random
-MAX_HAND_COUNT = 10
-
 
 LETTER_POOL = {
     'A': 9, 'B': 2, 'C': 2, 'D': 4, 'E': 12, 'F': 2, 'G': 3, 'H': 2, 
@@ -8,28 +6,22 @@ LETTER_POOL = {
     'Q': 1, 'R': 6, 'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 
     'Y': 2, 'Z': 1
 }
-points_dict = {
-    'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4, 
-    'I': 1, 'J': 8, 'K': 5, 'L': 1, 'M': 3, 'N': 1, 'O': 1, 'P': 3, 
-    'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 
-    'Y': 4, 'Z': 10
-    }
-
-LETTERS_LIST = list(LETTER_POOL.keys())
 
 def draw_letters():
-    available_letters = LETTER_POOL.copy()
+    MAX_HAND_COUNT = 10
+    all_available_let = []
     current_hand = []
 
+    for letter, letter_frequency in LETTER_POOL.items():
+        for letter_index in range(letter_frequency):
+            all_available_let.append(letter)
+
     while len(current_hand) < MAX_HAND_COUNT:
-        random_letter = random.choice(LETTERS_LIST)
+        available_let_list_index = random.randint(0, len(all_available_let)-1)
+        current_hand.append(all_available_let[available_let_list_index])
+        all_available_let.pop(available_let_list_index)
 
-        if available_letters[random_letter] > 0:
-            available_letters[random_letter] -= 1
-            current_hand.append(random_letter)
-        
-        print(current_hand)
-
+    print(current_hand)
     return current_hand
 
 def uses_available_letters(word, letter_bank):
@@ -49,6 +41,13 @@ def uses_available_letters(word, letter_bank):
 
 def score_word(word):
 
+    points_dict = {
+    'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4, 
+    'I': 1, 'J': 8, 'K': 5, 'L': 1, 'M': 3, 'N': 1, 'O': 1, 'P': 3, 
+    'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 
+    'Y': 4, 'Z': 10
+    }
+
     word = word.upper()
     BONUS_POINTS = 8
     total_points = 0
@@ -63,21 +62,28 @@ def score_word(word):
 
 score_word("XXXXXXX")
 
-
 def get_highest_word_score(word_list):
-    print('------- Wave 4 -------')
-    word_score_board = {}
-    best_score = 0
     best_word = ''
+    best_score = 0
+    best_word_length = 0
 
     for word in word_list:
-        word_score_total = score_word(word)
-        word_score_board[word] = word_score_total
+        word_score = score_word(word)
+        word_length = len(word)
 
-    for word, word_score in word_score_board.items():
         if word_score > best_score:
-            best_score = word_score
             best_word = word
-    # print(best_score)
-    print(best_word)
+            best_score = word_score
+            best_word_length = word_length
+
+        elif word_score == best_score:
+            if word_length == 10 and best_word_length != 10:
+                best_word = word
+                best_word_length = word_length
+            elif word_length == 10 and best_word_length == 10:
+                continue 
+            elif word_length < best_word_length and best_word_length != 10:
+                best_word = word
+                best_word_length = word_length
+
     return best_word, best_score
