@@ -12,26 +12,25 @@ def draw_letters():
     
     while len(hand)< 10:
         # create  a list of availbe letters
-        avaiable_letters =[]
+        available_letters =[]
         # check each letter and add ot availble_letters if greater than 0
         for letter, count in letter_counts.items():
             if count > 0:
-                avaiable_letters.append(letter)
-        if not avaiable_letters:
+                available_letters.append(letter)
+        if not available_letters:
             break
         # chose a random letter for avail letters
         # my randon index generates a randon int between 0 and last index of availabe letters
-        index = randint(0, len(avaiable_letters) -1)
-        choose_letter = avaiable_letters[index]
+        index = randint(0, len(available_letters) -1)
+        choose_letter = available_letters[index]
         # decreases the count of the choosen letters 
         letter_counts[choose_letter] -= 1
         # this adds the choose letter to the hand list above 
         hand.append(choose_letter)
-        # decrease the count of chose letter
-        
+  
     # convert letter to str
     return ''.join(hand)      
-        
+
  # wave 2 
                         
 def uses_available_letters(word, letter_bank):
@@ -64,7 +63,8 @@ def uses_available_letters(word, letter_bank):
             return False
     # refers back to the 1st for loop, and if there is enough letters to form a word then contiue on 
     return True
-    
+
+# wave 3
 def score_word(word):
    # if the word has zero point the ret
     if not word:
@@ -87,21 +87,33 @@ def score_word(word):
     if len(word) >= 7 :
         total_score += 8
             
-    return total_score
+    return total_score  
 
-
-# find highest score word
-# from parm word_list is a list of str
-# return tuple that represents the winning word
-# tuple must have:
-#   index 0 ([0]): a string of a word
-#   index 1 ([1]): the score of the work
-# for words that tie use tie break
-#   word with fewest letter wins unless 10 letter
-#   if top score is tied between multipul words and one is 10 letters long chose the 10 letter one over the other
-# if all wors are the same score and lenth , pick the first one in the list
-# 
+# wave 4
 def get_highest_word_score(word_list):
-    pass
+    # initialize tuple, 1st stores the word, 2nd store the score
+    highest_score = (None, 0)
+
+    for word in word_list:
+        # compare current_score with word
+        new_score = score_word(word)
+        # if new_scorre is greater then the highest_score
+        if new_score > highest_score[1]:
+            # update new high score in tuple
+            highest_score = (word, new_score)
+        # compair if  new_scores are tied if so move on
+        elif new_score == highest_score[1]:
+            # if len of the word equals 10 and the len of highet_score is not equal to 10
+            if len(word) == 10 and len(highest_score[0]) != 10:
+                highest_score = (word, new_score)
+            # if no word is 10 letters long, and if the lenth of the word is shorter than high_score word chose the shorter word
+            elif len(highest_score[0]) != 10 and len(word) < len(highest_score[0]):
+                highest_score = (word, new_score)
+                       
+    return highest_score        
+        
+   
+            
+
 
 
