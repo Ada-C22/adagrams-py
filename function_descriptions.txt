@@ -1,6 +1,0 @@
-Draw_letters() function
-    1. chosen_letters: variable will hold a list of ten letters the player will use to create there anagrams
-    2. used a while loop to repeat some set of instructions until the len(chosen_letters) == 10
-    3. Within the loop, we'll want to select a letter at random from the letter pool
-        a. imported randint() from random
-    

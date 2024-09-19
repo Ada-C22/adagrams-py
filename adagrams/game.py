@@ -67,7 +67,6 @@ def uses_available_letters(word, letter_bank):
         if letter in available_letters_dict.keys():
             available_letters_dict[letter] += 1
             continue
-        
         available_letters_dict[letter] = 1
 
     for letter in word_uppercase:
