@@ -1,13 +1,12 @@
 import random
 
-LETTER_POOL = {
+def draw_letters():
+    LETTER_POOL = {
     'A': 9, 'B': 2, 'C': 2, 'D': 4, 'E': 12, 'F': 2, 'G': 3, 'H': 2, 
     'I': 9, 'J': 1, 'K': 1, 'L': 4, 'M': 2, 'N': 6, 'O': 8, 'P': 2, 
     'Q': 1, 'R': 6, 'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 
     'Y': 2, 'Z': 1
-}
-
-def draw_letters():
+    }
     MAX_HAND_COUNT = 10
     all_available_let = []
     current_hand = []
@@ -21,7 +20,6 @@ def draw_letters():
         current_hand.append(all_available_let[available_let_list_index])
         all_available_let.pop(available_let_list_index)
 
-    print(current_hand)
     return current_hand
 
 def uses_available_letters(word, letter_bank):
@@ -30,13 +28,10 @@ def uses_available_letters(word, letter_bank):
     for input_letter in word:
         letter_freq_in_letter_bank = letter_bank.count(input_letter)
         letter_freq_in_word = word.count(input_letter)
-        # print(input_letter, letter_freq_in_letter_bank, letter_freq_in_word)
 
         if input_letter not in letter_bank or letter_freq_in_word > letter_freq_in_letter_bank:
-            print(False)
             return False
         
-    print(True)
     return True
 
 def score_word(word):
@@ -47,7 +42,6 @@ def score_word(word):
     'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 
     'Y': 4, 'Z': 10
     }
-
     word = word.upper()
     BONUS_POINTS = 8
     total_points = 0
@@ -59,8 +53,6 @@ def score_word(word):
         total_points += BONUS_POINTS
 
     return total_points
-
-score_word("XXXXXXX")
 
 def get_highest_word_score(word_list):
     best_word = ''
@@ -75,7 +67,6 @@ def get_highest_word_score(word_list):
             best_word = word
             best_score = word_score
             best_word_length = word_length
-
         elif word_score == best_score:
             if word_length == 10 and best_word_length != 10:
                 best_word = word
