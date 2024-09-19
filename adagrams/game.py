@@ -93,7 +93,7 @@ def get_highest_word_score(word_list):
             highest_score = score
             best_word = [word, score]
         elif score == highest_score:
-            if len(word) == 10 and len(best_word[0]) != 10:
+            if len(word) == 10 and len(best_word[0])!= 10:
                 best_word = [word, score]
             elif len(word) < len(best_word[0]) and len(best_word[0]) != 10:
                 best_word = [word, score]

@@ -101,4 +101,4 @@ if __name__ == "__main__":
         wave = int(args[1])
     else:
         wave = "ERROR"
-    main(wave)
+    main(wave)pvfj
