@@ -40,6 +40,7 @@ def draw_letters():
         random.shuffle(all_letters)
         random_index = random.randint(0, len(all_letters)-1)
         hand.append(all_letters[random_index])
+        del all_letters[(random_index)]
     return hand
 
 
