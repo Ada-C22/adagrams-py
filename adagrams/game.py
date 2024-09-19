@@ -31,17 +31,14 @@ letter_pool = {
 
 def draw_letters():
     """
-    import random 
-    build an array (a hand) of 10 string
-    a letter randomly draw from that pool
+    function to create a random hand of 10 letters
+    no input
+    output is a list of 10 random letters
     """ 
-    
-    # give variable names to the letters and max usage num 
+    # assign variable names to the letters and max usage num 
     letter_list, usage_list = list(letter_pool.keys()), list(letter_pool.values())
     
-    # generate a random letter
     hand = []
-    
     while len(hand) < 10:
         position = random.randint(0, len(letter_list)-1)
         letter_frequency = usage_list[position] # assigns the random int to a usage number
@@ -54,17 +51,39 @@ def draw_letters():
     return hand
 
 def uses_available_letters(word, letter_bank):
+    """
+    function to check if a letter is in a list
+    input is word (a string of letters), and letter bank (an array of words)
+    output is return True if letter is in letter bank, or return False if letter is not in letter bank
+    """ 
+    # word = word.upper()
+    # count = 0
+    # for letter in word:
+    #     if word.count(letter) > letter_bank.count(letter):
+    #         return False
+    #     elif letter in letter_bank:
+    #         count += 1
+    # if count == len(word):
+    #     return True
+
     word = word.upper()
-    count = 0
-    for letter in word:
-        if word.count(letter) > letter_bank.count(letter):
+    list = []
+    letter_bank_copy = letter_bank.copy()
+
+    for each_letter in word:
+        if each_letter in letter_bank_copy:
+            list.append(each_letter)
+            letter_bank_copy.remove(each_letter)
+        else:
             return False
-        elif letter in letter_bank:
-            count += 1
-    if count == len(word):
-        return True
+    return True
 
 def score_word(word):
+    """
+    function calculates a score based on points for each letter and/or length of word and return score
+    input word (string)
+    output a score (int)
+    """ 
     score_chart = {
         1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
         2: ['D', 'G'],
@@ -86,33 +105,39 @@ def score_word(word):
     
     return score
 
-words = ["X", "XX", "XXX", "XXXX"]
 def get_highest_word_score(word_list):
+    """
+    function determines word with highest score
+    input is word list (list of words)
+    output is a tuple of the winning word and its points
+    """ 
     
     highest_value = 0
     highest_value_word = ""
-    score_dict = {} # dict containing all words and scores
-    word_length = 9
+    len_dict = {} # dict containing all words and its length
+    word_length = 10
+
 
     for each_word in word_list:
         each_score = score_word(each_word) # assign score 
-        if each_score >= highest_value:
-            if each_score > highest_value:
-                score_dict = {}
-                highest_value = each_score
-                score_dict[each_word] = len(each_word)
-            elif each_score == highest_value:
-                score_dict[each_word] = len(each_word)
 
-    for each_key, each_value in score_dict.items():
+        if each_score > highest_value:
+            len_dict = {}
+            highest_value = each_score
+            len_dict[each_word] = len(each_word)
+        
+        elif each_score == highest_value:
+            len_dict[each_word] = len(each_word)
+
+    for each_key, each_value in len_dict.items():
+
+        # if the lenth of word is 10, chooses it or the first word
         if each_value == 10:
             highest_value_word = each_key
             break
-        
+        # picks the lowest length word
         elif each_value < word_length:
             word_length = each_value
             highest_value_word = each_key
             
     return highest_value_word, highest_value
-
-get_highest_word_score(words)
