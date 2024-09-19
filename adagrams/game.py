@@ -7,7 +7,7 @@ def draw_letters():
         player = [draw_letters(letters)]
     return player
 
-# def uses_available_letters(word, letter_bank):
+def uses_available_letters(word, letter_bank):
     word = word.upper()
     letter_bank_remaining = letter_bank.copy()
 
