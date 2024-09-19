@@ -99,4 +99,58 @@ def score_word(word):
     return total_points
 
 def get_highest_word_score(word_list):
-    pass
+    LETTER_SCORES = {
+        'A': 1, 
+        'B': 3, 
+        'C': 3, 
+        'D': 2, 
+        'E': 1, 
+        'F': 4, 
+        'G': 2, 
+        'H': 4, 
+        'I': 1, 
+        'J': 8, 
+        'K': 5, 
+        'L': 1, 
+        'M': 3, 
+        'N': 1, 
+        'O': 1, 
+        'P': 3, 
+        'Q': 10, 
+        'R': 1, 
+        'S': 1, 
+        'T': 1, 
+        'U': 1, 
+        'V': 4, 
+        'W': 4, 
+        'X': 8, 
+        'Y': 4, 
+        'Z': 10
+    }
+    
+    word_result = ['0',0]
+    for current_word in word_list:
+        current_sum = 0
+        for letter in current_word:
+            key = letter.upper()
+            current_sum = current_sum + LETTER_SCORES[key]
+
+        if len(current_word) == 10:
+            current_sum = current_sum + 8
+
+        previous_sum = word_result[1] 
+        previous_word = word_result[0]
+
+        if previous_sum < current_sum:
+            word_result[0] = current_word
+            word_result[1] = current_sum  
+        elif previous_sum == current_sum:
+            previous_size = len(previous_word)
+            current_size = len(current_word)
+
+            if(current_size==10 and previous_size !=10):
+                word_result[0] = current_word
+            elif current_size!=10 and previous_size !=10 and current_size < previous_size:
+                word_result[0] = current_word
+                
+    return tuple(word_result)
