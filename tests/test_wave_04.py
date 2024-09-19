@@ -118,3 +118,27 @@ def test_get_highest_word_does_not_return_early_after_first_tiebreaker():
     # Assert
     assert best_word[0] == "JQ"
     assert best_word[1] == 18
+
+
+#PRACTICE ADDITIONAL TESTS
+def test_get_highest_word_many_ties_pick_first_shortest():
+    # Arrange
+    words = ["LL", "NN", "RR", "AA"]
+
+    # Act
+    best_word = get_highest_word_score(words)
+
+    # Assert
+    assert best_word[0] == "LL"
+    assert best_word[1] == 2
+
+def test_get_highest_word_many_ties_pick_first_shortest_not_in_first_position():
+    # Arrange
+    words = ["LL", "NN", "JQ", "AA"]
+
+    # Act
+    best_word = get_highest_word_score(words)
+
+    # Assert
+    assert best_word[0] == "JQ"
+    assert best_word[1] == 18
