@@ -37,12 +37,22 @@ def draw_letters():
         for num in range(0, letter_counts[key]):
             all_letters.append(key)
     for pepar in range(0, 10):
-        random.shuffle(all_letters)
         random_index = random.randint(0, len(all_letters)-1)
         hand.append(all_letters[random_index])
         del all_letters[(random_index)]
     return hand
 
+# def draw_letters():
+#     all_letters = []
+#     hand= []
+#     for key in letter_counts:
+#         for num in range(0, letter_counts[key]):
+#             all_letters.append(key)
+#     for pepar in range(0, 10):
+#         random.shuffle(all_letters)
+#         random_index = random.randint(0, len(all_letters)-1)
+#         hand.append(all_letters[random_index])
+#     return hand
 
 def uses_available_letters(word, letter_bank):
     word = word.upper()
@@ -75,8 +85,15 @@ def score_word(word):
 
 
 
-
 def get_highest_word_score(word_list):
+    winning_word = ''
+    winning_score = 0
     for word in word_list:
         score = score_word(word)
-
+        if winning_score == score and len(winning_word) != 10:
+            if len(word) == 10 or len(winning_word) > len(word):
+                winning_word = word
+        elif winning_score < score:
+            winning_score = score
+            winning_word = word
+    return winning_word, winning_score
