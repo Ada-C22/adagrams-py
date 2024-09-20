@@ -38,7 +38,7 @@ def test_uses_available_letters_false_word_overuses_letter():
 def test_uses_available_letters_does_not_change_letter_bank():
     # Arrange
     letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-    letters_copy = letters[:]
+    letters_copy = letters[:] # copy of the entire list
     word = "ABCD"
 
     # ACT

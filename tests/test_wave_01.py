@@ -50,7 +50,6 @@ def test_draw_letters_is_list_of_letter_strings():
         assert len(elem) == 1
 
 def test_letter_not_selected_too_many_times():
-
     for i in range(1000):
         # Arrange/Act
         letters = draw_letters()
