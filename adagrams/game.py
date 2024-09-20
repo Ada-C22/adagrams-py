@@ -57,14 +57,14 @@ def draw_letters():
 def uses_available_letters(word, letter_bank):
     #check if the word is an anagram of some or all of the given letters in the hand
 
-    word = word.casefold()
+    casefold_word = word.casefold()
     letter_bank_copy = []
-    
+
     #Ensure letter matching in letter_bank and word
     for letter in letter_bank:
         letter_bank_copy.append(letter.casefold())
 
-    for char in word:
+    for char in casefold_word:
         #Take one of the letters from the hand and make unavailable in the bank copy
         if char in letter_bank_copy:
             letter_bank_copy.remove(char)
@@ -98,40 +98,10 @@ def score_word(word):
                 points = 0
 
     #Extra points if word has 7 or more characters 
-    if len(word) >= 7:
+    if len(word) > 6:
         total_points += 8
     
     return total_points
-
-# #------Score_Word Func Using Dictionaries --------#
-# SCORE_CHART = {
-#     1:['A', 'E','I','O','U','L','N','R','S','T'],
-#     2:['D','G'],
-#     3:['B','C','M','P'],
-#     4:['F','H','V','W','Y'],
-#     5:['K'],
-#     8:['J','X'],
-#     10:['Q','Z']
-
-# }
-# def score_word(word):
-#     #Returns the score of a given word as defined by the SCORE_CHART
-
-#     points = 0
-#     word = word.upper()
-
-#     #access the lists in the dict (values)as letters
-#     for score, letters in SCORE_CHART.items():
-#         for i in range(len(letters)): 
-#             for char in word:        
-#                 if char in letters[i]: #check char in
-#                     points += score    
-
-#     #Extra points if word has 7 or more characters 
-#     if len(word) >= 7:
-#         points += 8
-
-#     return points
 
 def get_highest_word_score(word_list):
     #Calculate which word from the list has the highest score 
@@ -150,7 +120,7 @@ def get_highest_word_score(word_list):
             highest_score = current_score
         
         #If a tie and no word is 10 char, pick the shortest word 
-        if current_score == highest_score \
+        elif current_score == highest_score \
         and len(word) < len(highest_word) \
         and len(highest_word) != 10:
             highest_word = word
