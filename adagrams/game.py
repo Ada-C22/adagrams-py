@@ -122,6 +122,9 @@ def score_word(word):
 #     return points
 
 def get_highest_word_score(word_list):
+    #Calculate which word from the list has the highest score 
+    # applying tie-breaking logic
+    
     highest_score = 0
     highest_word = " "
     
