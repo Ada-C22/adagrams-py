@@ -50,7 +50,7 @@ def draw_letters():
 
 def uses_available_letters(word, letter_bank):
     """
-    Input: word (str) chosen by user, letter_bank (list of strings) of hand
+    Input: word (str) representing word chosen by user, letter_bank (list of strings) representing hand
     Output: bool for whether available letters were used
     """
     word = word.upper()
@@ -72,7 +72,7 @@ def uses_available_letters(word, letter_bank):
 
 def score_word(word):
     """
-    Input: word (str) by user
+    Input: word (str) representing word chosen by user
     Output: score (int) based on SCORE_CHART dictionary
     """
     SCORE_CHART = {
@@ -116,7 +116,7 @@ def score_word(word):
 
 def get_highest_word_score(word_list):
     """
-    Input: word_list (list of strings)
+    Input: word_list (list of strings) representing words chosen by user
     Output: tuple of highest_word (str) and highest_score (int) for highest scoring word and its score
     """
     highest_score = 0
