@@ -101,4 +101,29 @@ def score_word(word):
     return total_score
 
 def get_highest_word_score(word_list):
-    pass
+    highest_word = ""
+    highest_score = 0
+
+    for word in word_list:
+        # Get the score of the current word
+        score = score_word(word)
+
+        # If this score is higher than what we've got
+        if score > highest_score:
+            #Update the best word
+            highest_word = word
+            # Update the best score
+            highest_score = score
+        elif score == highest_score:
+            # Prefer the ten letter word if available
+            if len(word) == 10 and len(highest_word) != 10:
+                highest_word = word
+            # Prefer the shorter word if they are the same score
+            elif len(word) < len(highest_word) and len(highest_word) <10:
+                highest_word = word
+            # If both are the same lenght, choose the one that shows first in the list
+            elif len(word) == len(highest_word):
+                # Do nothing and keep the current highest word
+                continue
+
+    return (highest_word, highest_score)
