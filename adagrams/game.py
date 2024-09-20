@@ -67,7 +67,7 @@ def uses_available_letters(word, letter_bank):
         else:
             letter_bank_count[letter] += 1
     
-    for char in word:
+    for char in word.upper():
         if letter_bank_count.get(char,0) < 1:
             return False 
         letter_bank_count[char] -= 1
