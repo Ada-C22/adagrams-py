@@ -1,5 +1,5 @@
 from string import ascii_uppercase
-from random import randint
+from random import randint , choice
 
 
 
@@ -34,12 +34,20 @@ def draw_letters():
     }
     hand = []
 
+
     while len(hand) < 10:
-        pick = ascii_uppercase[randint(0, len(ascii_uppercase)-1)]
+        pick = choice(ascii_uppercase)
         if letter_pool[pick] > 0:
             hand.append(pick)
             letter_pool[pick] -= 1
     return hand
+
+    # while len(hand) < 10:
+    #     pick = ascii_uppercase[randint(0, len(ascii_uppercase)-1)]
+    #     if letter_pool[pick] > 0:
+    #         hand.append(pick)
+    #         letter_pool[pick] -= 1
+    # return hand
 
 
 def uses_available_letters(word, letter_bank):
