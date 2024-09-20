@@ -95,13 +95,10 @@ def score_word(word):
 def get_highest_word_score(word_list):
     '''returns the word with the highest score from word_list'''
     winning_word = ""
-    max_score = score_word(word_list[-1])
+    max_score = 0
         
     for word in word_list: 
-        if not winning_word: 
-            winning_word = word
-            max_score = score_word(word)
-        elif score_word(word) > max_score: 
+        if score_word(word) > max_score: 
             winning_word = word
             max_score = score_word(word)
         elif score_word(word) == max_score:
