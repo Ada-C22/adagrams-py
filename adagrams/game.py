@@ -71,24 +71,25 @@ def draw_letters():
     draw_letters = []
     letter_count = {}
     letters = []
-        
+       
     for letter, count in letter_pool.items():
         letters.extend([letter] * count)    
+    # print(letters)
     
     while len(draw_letters) < 10:    
         letter_index = random.randint(0, len(letters)-1)
         random_letter = letters[letter_index]
         
         if random_letter not in draw_letters:
+            #setting key and value to letter_count {}
             letter_count[random_letter] = 0
-        
+            
+        #comparing the values of letter_count dict vs letter_pool dict
         if letter_count[random_letter] < letter_pool[random_letter]:
             draw_letters.append(random_letter)
             letter_count[random_letter] += 1
             
-    return draw_letters     
-    
-draw_letters()
+    return draw_letters         
 
 def uses_available_letters(word, letter_bank):
     """
@@ -129,8 +130,6 @@ def score_word(word):
         total_score += 8
         
     return total_score
-
-        
 
 def get_highest_word_score(word_list):
     """
