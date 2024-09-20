@@ -11,10 +11,12 @@ def draw_letters():
     all_available_let = []
     current_hand = []
 
+    # creates a list of avaialble 98 letters based on respective frequencis
     for letter, original_letter_count in LETTER_POOL.items():
         for letter_index in range(original_letter_count):
             all_available_let.append(letter)
 
+    # updates initial available list of letters to show remaining letters
     while len(current_hand) < MAX_HAND_COUNT:
         available_let_list_index = random.randint(0, len(all_available_let)-1)
         current_hand.append(all_available_let[available_let_list_index])
@@ -23,12 +25,14 @@ def draw_letters():
     return current_hand
 
 def uses_available_letters(word, letter_bank):
-    word = word.upper()
+    word = word.upper() # capitalizes input word
 
+    # assures that each letter in the word is in the current word bank and within the count
     for input_letter in word:
         letter_freq_in_letter_bank = letter_bank.count(input_letter)
         letter_freq_in_word = word.count(input_letter)
-
+        
+        # returns false if the letter is not in word bank or too few
         if input_letter not in letter_bank or letter_freq_in_word > letter_freq_in_letter_bank:
             return False
         
@@ -46,9 +50,11 @@ def score_word(word):
     BONUS_POINTS = 8
     total_points = 0
 
+    # sums the points of each letter
     for input_letter in word:
         total_points += points_dict[input_letter]
 
+    # adds bonus points to word containing 7+ letters
     if len(word) >= 7:
         total_points += BONUS_POINTS
 
@@ -63,16 +69,25 @@ def get_highest_word_score(word_list):
         word_score = score_word(word)
         word_length = len(word)
 
+        # selects the highest scoring word in the word_list
         if word_score > best_score:
             best_word = word
             best_score = word_score
             best_word_length = word_length
+
+        # selects best word according to the adagrams tie breaking rules
         elif word_score == best_score:
+
+            # chooses the 10 letter word as the best word
             if word_length == 10 and best_word_length != 10:
                 best_word = word
                 best_word_length = word_length
+
+            # chooses the first 10 letter word 
             elif word_length == 10 and best_word_length == 10:
                 continue 
+
+            # selects the shortest word if not word length is fewer than 10 letters
             elif word_length < best_word_length and best_word_length != 10:
                 best_word = word
                 best_word_length = word_length
