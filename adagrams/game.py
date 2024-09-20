@@ -32,19 +32,26 @@ LETTER_POOL = {
 def draw_letters():
     #Create a set of 10 letters that matches the letter frequency distribution#
     draw = []
-    letter_pool_copy = LETTER_POOL.copy()
-    letters_list = list(letter_pool_copy.keys())
+    letter_pool_copy = []
+
+    #Calculate the weigths for each letter
+    for letter, frequency in LETTER_POOL.items():
+        weights = letter*frequency
+        #add the weight letters to a new list
+        for char in weights:
+            letter_pool_copy.append(char)
 
     while len(draw) < 10:       
         #Take a random number within the len of letter pool and get the letter in that index
-        random_letter = letters_list[random.randint(0,len(letter_pool_copy)-1)]
+        random_letter = letter_pool_copy[random.randint(0,len(letter_pool_copy)-1)]
         
         #Check if the letter is still availabe in the letter pool and add it to the hand
-        if letter_pool_copy[random_letter] >= 1:
+        if random_letter in letter_pool_copy:
             draw.append(random_letter)
             
             #reduce the frequency in letter pool, for each letter added to the hand
-            letter_pool_copy[random_letter] -= 1         
+            letter_pool_copy.remove(random_letter)
+                
     return draw
 
 def uses_available_letters(word, letter_bank):
