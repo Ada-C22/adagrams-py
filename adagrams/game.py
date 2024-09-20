@@ -32,6 +32,7 @@ LETTER_POOL = {
         'Z': 1
     }
 
+#### WAVE 1 HELPER FUNCTION ####
 def all_letters_list():
 
     all_letters_list = []
