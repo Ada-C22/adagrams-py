@@ -27,7 +27,7 @@ def test_get_highest_word_score_accurate_unsorted_list():
 
 def test_get_highest_word_tie_prefers_shorter_word():
     # Arrange
-    words = ["MMMM", "WWW"]
+    words = ["MMMM", "WWW"] 
 
     # Act
     best_word = get_highest_word_score(words)
