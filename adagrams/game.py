@@ -57,8 +57,13 @@ def draw_letters():
 def uses_available_letters(word, letter_bank):
     #check if the word is an anagram of some or all of the given letters in the hand
 
-    letter_bank_copy = letter_bank.copy()
-    word = word.upper()  
+    word = word.casefold()
+    letter_bank_copy = []
+    
+    #Ensure letter matching in letter_bank and word
+    for letter in letter_bank:
+        letter_bank_copy.append(letter.casefold())
+
     for char in word:
         #Take one of the letters from the hand and make unavailable in the bank copy
         if char in letter_bank_copy:
