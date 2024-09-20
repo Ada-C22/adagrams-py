@@ -1,6 +1,7 @@
 .vscode/
 .DS_Store
-
+.idea
+*.iml
 # GitHub's boilerplate Python gitignore
 # https://github.com/github/gitignore/blob/master/Python.gitignore
 
