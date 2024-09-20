@@ -95,32 +95,25 @@ def score_word(word):
                 total_score += score
     return total_score
 
-def word_score_list(word_list):
-    score_chart = []
-    for word in word_list:
-        word_score = score_word(word)
-        score_chart += [word_score]
-    return score_chart
-
 
 def get_highest_word_score(word_list):
    
     winning_word = None
-    score_chart = word_score_list(word_list)
-    highest_score = score_chart[0]
+    highest_score = 0
 
-    for i in range(len(word_list)):
-        if not winning_word:
-            winning_word = word_list[i]
-        elif score_chart[i] > highest_score:
-            winning_word = word_list[i]
-            highest_score = score_chart[i]
-        elif score_chart[i] == highest_score:
-            if len(word_list[i]) == 10 and len(winning_word) != 10:
-                winning_word = word_list[i]
-            elif len(winning_word) != 10 and len(word_list[i]) < len(winning_word):
-                winning_word = word_list[i]
+    for word in word_list:
+        score = score_word(word)
+        if score > highest_score:
+            highest_score = score
+            winning_word = word
+        elif score == highest_score:
+            if len(word) == 10 and len(winning_word) != 10:
+                winning_word = word
+            elif len(winning_word) != 10 and len(word) < len(winning_word):
+                winning_word = word
     return winning_word, highest_score
+
+
     
 
 
