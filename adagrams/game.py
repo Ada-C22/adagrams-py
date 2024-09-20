@@ -30,17 +30,39 @@ def draw_letters():
      }
    #taking an empty list to store drawn letters
    drawn_letters =[]
+# using random.choice
+#    while len(drawn_letters) < 10:
+
+#     #extracting all the keys from dictionary
+#     letter_pool_keys = letter_pool.keys()
+#     letter = random.choice(list(letter_pool_keys))
+#     if letter_pool[letter] > 0:
+#         drawn_letters.append(letter)
+
+#         #adding random letter to the list and decreasing the frequency of the letter
+#         letter_pool[letter]-= 1
+#    return drawn_letter
+
+
+   total_letters = sum(letter_pool.values())
+
    while len(drawn_letters) < 10:
+        # Generating a random number between 1 and the total number of letters
+        rand_num = random.randint(1, total_letters)
 
-    #extracting all the keys from dictionary
-    letter_pool_keys = letter_pool.keys()
-    letter = random.choice(list(letter_pool_keys))
-    if letter_pool[letter] > 0:
-        drawn_letters.append(letter)
+        # Finding  the corresponding letter
+        cumulative_count = 0
+        for letter, frequency in letter_pool.items():
+            cumulative_count += frequency
+            if rand_num <= cumulative_count:
+                drawn_letters.append(letter)
+                letter_pool[letter] -= 1
+                total_letters -= 1
+                break
 
-        #adding random letter to the list and decreasing the frequency of the letter
-        letter_pool[letter]-= 1
+
    return drawn_letters
+
 
 def uses_available_letters(word, letter_bank):
 
@@ -72,12 +94,13 @@ def uses_available_letters(word, letter_bank):
 #     score_value = {
 #         'AEIOULNRST': 1,'DG': 2, 'BCMP': 3, 'FHVWY': 4, 'K': 5, 'JX': 8, 'QZ': 10
 #         }
-#     if len(word) > 6 and len(word) <=10:
-#         total_score = 8
+
 #     for letter in word:
 #         for scoring_letter_group, score in score_value.items():
 #             if letter in scoring_letter_group:
 #                 total_score+= score
+#     if len(word) > 6 and len(word) <=10:
+#         total_score += 8
 #     return total_score
 
 
@@ -95,9 +118,12 @@ def score_word(word):
     }
     word = word.upper()
     total_score = 0
-    if len(word) > 6 and len(word) <=10:
-        total_score = 8
+
     total_score+= sum(score_value.get(letter, 0) for letter in word )
+
+    if len(word) > 6 and len(word) <=10:
+        total_score += 8
+
     return total_score
 
 
