@@ -35,13 +35,13 @@ def draw_letters():
 
     letters_available = []
     letters_drawn = []
-    num_letter_tiles = 10
+    NUM_LETTERS_TILE = 10
 
     for letter, quantity in LETTER_POOL.items():
-        for i in range(quantity):
+        for _ in range(quantity):
             letters_available.append(letter)
     
-    for i in range(num_letter_tiles):
+    for _ in range(NUM_LETTERS_TILE):
         random_number = random.randint(0, len(letters_available) - 1)
         letters_drawn.append(letters_available[random_number])
         letters_available.pop(random_number)
@@ -50,7 +50,7 @@ def draw_letters():
 
 def uses_available_letters(word, letter_bank):
     """
-    Input: word (str), letter_bank (list of strings)
+    Input: word (str) chosen by user, letter_bank (list of strings) of hand
     Output: bool for whether available letters were used
     """
     word = word.upper()
@@ -72,7 +72,7 @@ def uses_available_letters(word, letter_bank):
 
 def score_word(word):
     """
-    Input: word (str)
+    Input: word (str) by user
     Output: score (int) based on SCORE_CHART dictionary
     """
     SCORE_CHART = {
