@@ -1,31 +1,32 @@
+import random
 
 LETTER_POOL = {
-    1: {'A': 9},
-    2: {'B': 2},
-    3: {'C': 2},
-    4: {'D': 4},
-    5: {'E': 12},
-    6: {'F': 2},
-    7: {'G': 3},
-    8: {'H': 2},
-    9: {'I': 9},
-    10: {'J': 1},
-    11: {'K': 1},
-    12: {'L': 4},
-    13: {'M': 2},
-    14: {'N': 6},
-    15: {'O': 8},
-    16: {'P': 2},
-    17: {'Q': 1},
-    18: {'R': 6},
-    19: {'S': 4},
-    20: {'T': 6},
-    21: {'U': 4},
-    22: {'V': 2},
-    23: {'W': 2},
-    24: {'X': 1},
-    25: {'Y': 2},
-    26: {'Z': 1}
+    'A': 9, 
+    'B': 2, 
+    'C': 2, 
+    'D': 4, 
+    'E': 12, 
+    'F': 2, 
+    'G': 3, 
+    'H': 2, 
+    'I': 9, 
+    'J': 1, 
+    'K': 1, 
+    'L': 4, 
+    'M': 2, 
+    'N': 6, 
+    'O': 8, 
+    'P': 2, 
+    'Q': 1, 
+    'R': 6, 
+    'S': 4, 
+    'T': 6, 
+    'U': 4, 
+    'V': 2, 
+    'W': 2, 
+    'X': 1, 
+    'Y': 2, 
+    'Z': 1
 }
 
 SCORE_CHART = {
@@ -38,20 +39,14 @@ SCORE_CHART = {
     10: ['Q', 'Z']
     }
 
-def deep_copy_letter_pool(letter_pool):
-    letter_pool_copy = {}
-    for index, letters in letter_pool.items():
-        letter_count = {}
-        for letter, count in letters.items():
-            letter_count[letter] = count
-            letter_pool_copy[index] = letter_count
-    return letter_pool_copy
-
-
 def draw_letters():
-    import random
-    copy_pool = deep_copy_letter_pool(LETTER_POOL)
-    hand = []
+    hand =[]
+    copy_pool = {}
+
+    index = 1
+    for key, value in LETTER_POOL.items():
+        copy_pool[index] = {key: value}
+        index += 1
   
     while len(hand) < 10:
         letter_drawn = random.randint(1,26)
@@ -112,23 +107,3 @@ def get_highest_word_score(word_list):
             elif len(winning_word) != 10 and len(word) < len(winning_word):
                 winning_word = word
     return winning_word, highest_score
-
-
-    
-
-
-
-
-
-
-
-    
-            
-        
-
-        
-    
-
-                                         
-
-        
