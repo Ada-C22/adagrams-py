@@ -1,5 +1,4 @@
 import random
-import string
 def draw_letters():
     hand_of_letters = []
     LETTER_POOL = {
@@ -32,24 +31,23 @@ def draw_letters():
     }
     
     #iterate through the dict to convert letter_pool to a list
-    LETTER_POOL_list = []  
-    for letter,count in LETTER_POOL.items():
-        while count > 0:
-            LETTER_POOL_list.append(letter)
-            count -=1    
-   
-    total_letter_count = len(LETTER_POOL_list)
+    letter_pool_list = [] 
+
+    letter_pool_list = [letter for letter, count in LETTER_POOL.items() for _ in range(count)] 
+
+    total_letter_count = len(letter_pool_list)
     hand_of_letters = []
-    #to get 10 letters 
+    
+    #randomly draw 10 letters 
+    #after each draw, swith the random letter with the current end
     for i in range(10):
-        #draw a random index from 0 to (totoal_letter_cout - i), given there are i letters
-        #there are already drawn & put back as the last i items in the list
-        draw_index = random.randrange(0, total_letter_count - i)
-        hand_of_letters.append(LETTER_POOL_list[draw_index])
-        # move the drawed letter to the end and won't be picked in next round
-        #swith two items in the list : a, b = b,a
-        LETTER_POOL_list[draw_index], LETTER_POOL_list[total_letter_count - i - 1] = \
-            LETTER_POOL_list[total_letter_count - i - 1], LETTER_POOL_list[draw_index]
+        random_index = random.randrange(0, total_letter_count - i)
+        randomly_drawn_letter = letter_pool_list[random_index]
+        hand_of_letters.append(randomly_drawn_letter)
+
+        last_index = total_letter_count - i - 1
+        letter_pool_list[random_index], letter_pool_list[last_index] = \
+        letter_pool_list[last_index], letter_pool_list[random_index]
 
     return hand_of_letters
 
@@ -86,8 +84,7 @@ def score_word(word):
     'Q': 10, 'Z': 10
     }
     score = 0
-    word = word.upper()
-    for char in word:
+    for char in word.upper():
         score += score_chart[char]
     
     if 7 <= len(word) <= 10:
@@ -111,8 +108,3 @@ def get_highest_word_score(word_list):
                 max_word = word
 
     return (max_word,max_score)
-
-
-    
-
-
