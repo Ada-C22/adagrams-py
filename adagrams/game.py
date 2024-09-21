@@ -1,5 +1,7 @@
 import random
 
+HAND_SIZE = 10
+
 LETTER_POOL = {
     'A': 9, 
     'B': 2, 
@@ -58,24 +60,23 @@ LETTER_POINT_VALUES = {
     'Z': 10
 }
 
+def create_letter_pool():
+    list_of_all_letters = []
+    list_of_all_letters = [letter for letter, letter_frequency in LETTER_POOL.items() for _ in range(letter_frequency)]
+
+    return list_of_all_letters
+
 def draw_letters():
     hand_of_letters_list = []
-
-    list_of_all_letters = []
-
-    for letter,amount_of_that_letter in LETTER_POOL.items():
-        for _ in range(amount_of_that_letter):
-            list_of_all_letters.append(letter)
-
-    while len(hand_of_letters_list) < 10:
-        a_random_letter = random.randint(0, len(list_of_all_letters) - 1)
-        random_letter_chosen = list_of_all_letters[a_random_letter]
+    list_of_all_letters = create_letter_pool()
+ 
+    while len(hand_of_letters_list) < HAND_SIZE:
+        a_random_index_that_accesses_random_letter = random.randint(0, len(list_of_all_letters) - 1)
+        random_letter_chosen = list_of_all_letters[a_random_index_that_accesses_random_letter]
         hand_of_letters_list.append(random_letter_chosen)
         list_of_all_letters.remove(random_letter_chosen)
          
     return hand_of_letters_list
-
-draw_letters()
 
 def uses_available_letters(word, hand_of_letters_list):
    
@@ -84,17 +85,14 @@ def uses_available_letters(word, hand_of_letters_list):
         word (str): a word input by user
         hand_of_letters_list (list): an list of drawn letters (strings) in a hand.
     Returns:
-        True: word bank is only using letters available in hand_of_letters_list
-        False: word bank is using letters or other things not included in hand_of_letters_list
+        True: word_bank_list is only using letters available in hand_of_letters_list
+        False: word_bank_list is using letters or other things not included in hand_of_letters_list
     '''
-    
+
     word_bank_list = []
+    word_bank_list = [letter for letter in hand_of_letters_list]
 
-    for letter in hand_of_letters_list:
-        word_bank_list.append(letter)
-
-    for letter in word:
-        letter = letter.upper()
+    for letter in word.upper():
         if letter not in word_bank_list:
             return False
         else:
@@ -103,32 +101,35 @@ def uses_available_letters(word, hand_of_letters_list):
     return True
 
 def score_word(word):
-    sum = 0
+    total_score = 0
 
-    for letter in word:
-        letter = letter.upper()
-        sum += LETTER_POINT_VALUES[letter]
+    for letter in word.upper():
+        total_score += LETTER_POINT_VALUES[letter]
     if len(word) >= 7:
-        sum += 8
-    return sum
+        total_score += 8
+    return total_score
 
 def get_highest_word_score(word_list):
-    winning_word_info = [] # ["word", score] index = [0, 1]
+    winning_word = None 
+    winning_score = 0
 
     for word in word_list:
         word_score = score_word(word)
-        if not winning_word_info:
-            winning_word_info = [word, word_score]
-        elif word_score > winning_word_info[1]:
-            winning_word_info = [word, word_score]
-        elif word_score == winning_word_info[1]:
-            if len(winning_word_info[0]) == 10:
+
+        if winning_word is None:
+            winning_word = word
+            winning_score = word_score
+        elif word_score > winning_score:
+            winning_word = word
+            winning_score = word_score
+        elif word_score == winning_score:
+            if len(winning_word) == 10:
                 continue
             if len(word) == 10:
-                winning_word_info = [word, word_score]
-            elif len(word) < len(winning_word_info[0]):
-                winning_word_info = [word, word_score]
-                                                            
-    winning_word_info_tuple = tuple(winning_word_info)
+                winning_word = word
+                winning_score = word_score
+            elif len(word) < len(winning_word):
+                winning_word = word
+                winning_score = word_score
 
-    return winning_word_info_tuple
+    return winning_word, winning_score
