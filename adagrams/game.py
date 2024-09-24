@@ -133,7 +133,7 @@ def get_highest_word_score(word_list):
         if len(word) == 10 and first_ten_letter_word is None:
             first_ten_letter_word = word
         
-    # iterating through dictionary
+    # iterating through dictionary: highest score
     for word, score in word_score_dict.items():
         if score > winning_score:
             winning_score = score
