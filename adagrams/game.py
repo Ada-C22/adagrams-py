@@ -1,7 +1,9 @@
 from string import ascii_uppercase
-from random import randint , choice
+from random import randint
 
-
+HAND_SIZE = 10
+BONUS_LENGTH_MIN = 7
+BONUS_POINTS = 8
 
 def draw_letters():
     letter_pool = {
@@ -32,53 +34,49 @@ def draw_letters():
         'Y': 2, 
         'Z': 1
     }
+
+    # list_of_letters = []
+    # for letter in LETTER_POOL:
+    #     list_of_letters.extend(letter * LETTER_POOL[letter])
+    # print(list_of_letters)
+
     hand = []
 
-
-    while len(hand) < 10:
-        pick = choice(ascii_uppercase)
-        if letter_pool[pick] > 0:
-            hand.append(pick)
-            letter_pool[pick] -= 1
+    while len(hand) < HAND_SIZE:
+        random_letter = ascii_uppercase[randint(0, len(ascii_uppercase)-1)]
+        if letter_pool[random_letter] > 0:
+            hand.append(random_letter)
+            letter_pool[random_letter] -= 1
     return hand
-
-    # while len(hand) < 10:
-    #     pick = ascii_uppercase[randint(0, len(ascii_uppercase)-1)]
-    #     if letter_pool[pick] > 0:
-    #         hand.append(pick)
-    #         letter_pool[pick] -= 1
-    # return hand
 
 
 def uses_available_letters(word, letter_bank):
-    word_list = list(word.upper())
     letter_bank_list = list(letter_bank)
 
-    for letter in word_list:
+    for letter in word.upper():
         if letter in letter_bank_list:
             letter_bank_list.remove(letter)
         else:
             return False
     return True
 
+draw_letters()
 
 def score_word(word):
     SCORES_CHART = {
-    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-    2: ['D', 'G'],
-    3: ['B', 'C', 'M', 'P'],
-    4: ['F', 'H', 'V', 'W', 'Y'],
-    5: ['K'],
-    8: ['J', 'X'],
-    10: ['Q', 'Z']
+    'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
+    'D': 2, 'G': 2,
+    'B': 3, 'C': 3, 'M': 3, 'P': 3,
+    'F': 4, 'H': 4, 'V': 4, 'W': 4, 'Y': 4,
+    'K': 5,
+    'J': 8, 'X': 8,
+    'Q': 10, 'Z': 10
 }
     scores_total = 0
     for letter in word.upper():
-        for score, letters_in_chart in SCORES_CHART.items():
-            if letter in letters_in_chart:
-                scores_total += score
-    if len(word) >= 7:
-        scores_total += 8
+        scores_total += SCORES_CHART[letter]
+    if len(word) >= BONUS_LENGTH_MIN:
+        scores_total += BONUS_POINTS
     return scores_total
 
 
@@ -91,12 +89,12 @@ def get_highest_word_score(word_list):
         if word_score > highest_score:
             highest_score = word_score
             winner_word = word
-        elif len(word) == 10 and word_score == highest_score and len(winner_word) < 10:
+        elif len(word) == HAND_SIZE and word_score == highest_score and len(winner_word) < HAND_SIZE:
             highest_score = word_score
             winner_word = word
         elif (word_score == highest_score
             and len(word) < len(winner_word)
-            and len(winner_word) != 10):
+            and len(winner_word) != HAND_SIZE):
             highest_score = word_score
             winner_word = word
 
