@@ -78,7 +78,8 @@ def uses_available_letters(word, letter_bank):
             else:
                 # if the letter has already reached it's maximum frequency, return False
                 return False
-
+#refactor option: Instead of comparing the two dictionaries, decrease the value of one each 
+# time a letter is in list. And return false when less than 0.
     return True
 
 def score_word(word):
@@ -104,11 +105,12 @@ def score_word(word):
     # Add 8 point bonus for words longer than 7 letters
     if len(word) >= 7:
         score += 8
+    # Refactor: could use dictioary and 1 loop rather than lists
     return score
 
 def get_highest_word_score(word_list):
     # Create a variable to hold the word with hightest score
-    highest_score = {"word": "", "score":0}
+    highest_score = {"word": "", "score":0} #I origianlly used a list, but changed to dictionary for readability
     # Iterate throught the word_list
     for word in word_list:
         # Score the word
@@ -129,3 +131,4 @@ def get_highest_word_score(word_list):
     return tuple([highest_score["word"], highest_score["score"]])
     
 
+#Refactor options: rewrite to put "Continue" first aka ignore cases first
