@@ -46,6 +46,10 @@ def uses_available_letters(word, letter_bank):
     if len(word) > len(letter_bank):
         return False
     
+    
+    word_uppercase = word.upper()
+
+
     word_uppercase = word.upper()
 
     available_letters_dict = {}
@@ -55,58 +59,49 @@ def uses_available_letters(word, letter_bank):
             continue
         available_letters_dict[letter] = 1
 
-    for letter in word_uppercase:
+    for letter in word.upper():
         if letter not in available_letters_dict.keys() or not available_letters_dict[letter] :
             return False
-        
         available_letters_dict[letter] -= 1
 
     return True
 
 def score_word(word):
     score = 0
-
     for letter in word.upper():
         if letter in LETTER_POINTS:
             score += LETTER_POINTS[letter]
     
-    if len(word) in range(7,11):
+    if len(word) >= 7 and len(word) < 11:
         score += 8
 
     return score
+    
 
 def get_highest_word_score(word_list):
+    highest_word = ""
     highest_score = 0
-    word_and_points_dict = {}
-    
+
     for word in word_list:
-        points = score_word(word)
+        word_score = score_word(word)
 
-        if points in word_and_points_dict.keys():
-            word_and_points_dict[points].append(word)
-        else:
-            word_and_points_dict[points] = [word]
+        if word_score > highest_score:
+            highest_word = word
+            highest_score = word_score
 
-        if points > highest_score:
-            highest_score = points
+        elif word_score == highest_score:
+            if len(word) == len(highest_word):
+                continue
+            elif len(highest_word) == 10:
+                continue
+            elif len(word) == 10:
+                highest_word = word
+                highest_score = word_score
+            elif len(word) < len(highest_word):
+                highest_word = word
+                highest_score = word_score
 
-
-    # DETERMINE TIE BREAKER
-    highest_scoring_words = word_and_points_dict[highest_score]
-
-    if len(highest_scoring_words) < 2:
-        return highest_scoring_words[0], highest_score
-    
-    shortest_word = highest_scoring_words[0]
-    for word in highest_scoring_words:
-        if len(word) == 10:
-            return word, highest_score
-        
-        if len(word) < len(shortest_word):
-            shortest_word = word
-    
-    return shortest_word, highest_score
-
+    return (highest_word, highest_score)
 
 
 
