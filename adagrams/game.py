@@ -1,33 +1,7 @@
 import random
 
-LETTER_POOL = {
-    'A': 9, 
-    'B': 2, 
-    'C': 2, 
-    'D': 4, 
-    'E': 12, 
-    'F': 2, 
-    'G': 3, 
-    'H': 2, 
-    'I': 9, 
-    'J': 1, 
-    'K': 1, 
-    'L': 4, 
-    'M': 2, 
-    'N': 6, 
-    'O': 8, 
-    'P': 2, 
-    'Q': 1, 
-    'R': 6, 
-    'S': 4, 
-    'T': 6, 
-    'U': 4, 
-    'V': 2, 
-    'W': 2, 
-    'X': 1, 
-    'Y': 2, 
-    'Z': 1
-}
+LETTER_POOL = ["A","A","A","A","A","A","A","A","A","B","B","C","C","D","D","D","D","E","E","E","E","E","E","E","E","E","E","E","E","F","F","G","G","G","H","H","I","I","I","I","I","I","I","I","I","J","K","L","L","L","L","M","M","N","N","N","N","N","N","O","O","O","O","O","O","O","O","P","P","Q","R","R","R","R","R","R","S","S","S","S","T","T","T","T","T","T","U","U","U","U","V","V","W","W","X","Y","Y","Z"]
+
 LETTER_POINTS = {
     ("A", "E", "I", "O", "U", "L", "N", "R", "S", "T") : 1,
     ("D", "G"): 2,
@@ -40,19 +14,12 @@ LETTER_POINTS = {
 
 def draw_letters():
     letter_pool = LETTER_POOL.copy()
-    letters = list(letter_pool.keys())
-
     chosen_letters = []
  
     while len(chosen_letters) < 10:
-        random_index = random.randint(0,25)
-        random_letter = letters[random_index]
-
-        if not letter_pool[random_letter]:
-            continue
-
+        random_index = random.randint(0,len(letter_pool)-1)
+        random_letter = letter_pool.pop(random_index)
         chosen_letters.append(random_letter)
-        letter_pool[random_letter] -= 1
 
     return chosen_letters
 
