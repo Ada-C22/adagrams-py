@@ -45,12 +45,6 @@ def draw_letters():
 def uses_available_letters(word, letter_bank):
     if len(word) > len(letter_bank):
         return False
-    
-    
-    word_uppercase = word.upper()
-
-
-    word_uppercase = word.upper()
 
     available_letters_dict = {}
     for letter in letter_bank:
