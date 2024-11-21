@@ -45,7 +45,14 @@ def draw_letters():
     return list_letters
 
 def uses_available_letters(word, letter_bank):
-    pass
+    word = word.upper()
+    letters_copy = letter_bank[:]
+    for letter in word:
+        if letter in letters_copy:
+            letters_copy.remove(letter)    
+        else:
+            return False
+    return True
 
 def score_word(word):
     pass
