@@ -32,8 +32,7 @@ def draw_letters():
     }
 
 
-    list_letters = []
-    
+    list_letters = []  
     while len(list_letters) != 10:
         letters = list(distribution_of_letters.keys())
         random_letter = random.choice(letters)
@@ -41,7 +40,6 @@ def draw_letters():
         if value > 0:
             distribution_of_letters[random_letter] = value -1
             list_letters.append(random_letter)
-
     return list_letters
 
 def uses_available_letters(word, letter_bank):
@@ -89,8 +87,7 @@ def score_word(word):
         value = score.get(letter, 0)
         total_score += value
     if len(word) >= 7 and len(word) <= 10 :
-            total_score += 8
-            
+            total_score += 8        
     return total_score
 
 
