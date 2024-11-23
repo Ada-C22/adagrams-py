@@ -74,34 +74,24 @@ def uses_available_letters(word, letter_bank):
     return True
 
 #-------- Score-Word Func Using Nested Lists --------#
-SCORE_CHART = [
-    [1,['A', 'E','I','O','U','L','N','R','S','T']],
-    [2,['D','G']],
-    [3,['B','C','M','P']],
-    [4,['F','H','V','W','Y']],
-    [5,['K']],
-    [8,['J','X']],
-    [10,['Q','Z']]
-]
+SCORE_DICT = {  'a': 1, 'e': 1, 'i': 1, 'o': 1, 'u': 1, 'l': 1, 'n': 1, 'r': 1, 
+                's': 1, 't': 1, 'd': 2, 'g': 2, 'b': 3, 'c': 3, 'm': 3, 'p': 3, 
+                'f': 4, 'h': 4, 'v': 4, 'w': 4, 'y': 4, 'k': 5, 'j': 8, 'x': 8, 
+                'q': 10, 'z': 10 }
+
 def score_word(word):
-    #Returns the score of a given word as defined by the SCORE_CHART
+    score = 0
 
-    total_points = 0
-    points = 0
-    word = word.upper()
-    for i in range(len(SCORE_CHART)):
-        for char in word:
-            if char in SCORE_CHART[i][1]: #check for char in each letter in list rows
-                points =SCORE_CHART[i][0] #If found, access the index that has the score
-                total_points += points
-            else:
-                points = 0
+    casefold_word = word.casefold()
 
-    #Extra points if word has 7 or more characters 
-    if len(word) > 6:
-        total_points += 8
-    
-    return total_points
+    for letter in casefold_word:
+        print (letter)
+        score += SCORE_DICT.get(letter)
+
+    if len(casefold_word) > 6:
+        score += 8
+
+    return score
 
 def get_highest_word_score(word_list):
     #Calculate which word from the list has the highest score 
