@@ -1,5 +1,4 @@
 import pytest
-
 from adagrams.game import score_word, get_highest_word_score
 
 def test_get_highest_word_score_accurate():
