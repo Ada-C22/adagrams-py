@@ -40,10 +40,12 @@ def draw_letters():
     #create a list to sotre user drawn on hand
     hand = []
     
+    letters = list(LETTER_POOL.keys())
+
     #use while loop to draw a random letter from letter pool
     while len(hand) < 10:
         # get all the letters from letter pool and store in a list
-        letters = list(LETTER_POOL.keys())
+        
 
         # get a random index from the letters list
         random_index = random.randint(0, len(letters) -1)
@@ -189,5 +191,5 @@ def get_highest_word_score(word_list):
                 best_word = temp_word
                 
     
-    reuslt = (best_word,highest_score)
-    return reuslt
+    result = (best_word,highest_score)
+    return result
