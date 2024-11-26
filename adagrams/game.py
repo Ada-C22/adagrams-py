@@ -32,35 +32,41 @@ LETTER_POOL = {
 def draw_letters():
     letter_list = []
     
-    # Create a list of letters, each letter appears according to their frequency
-    for letter, letter_freq in LETTER_POOL.items():
-        for i in range(letter_freq):
-            letter_list.append(letter)
+    # Create a list of letters, each letter appears according to their frequency, using this for loop
+    # for letter, letter_freq in LETTER_POOL.items():
+    #     for i in range(letter_freq):
+    #         letter_list.append(letter)
+
+    # Using list comprehension
+    letter_list = [letter for letter, letter_freq in LETTER_POOL.items() for _ in range(letter_freq)]
     
 
     #Create an empty letter_bank list, each letter will be append to letter_bank according to their random index. 
     #Using a while loop to control only ten letters with random indice will be added to letter_bank
     #If an index is used, it will be added to the set of indiced_used, so it will not be chosen again
+    # letter_bank = []
+    # indices_used = set()
+    # while len(letter_bank) < 10:
+    #     index = random.randint(0, len(letter_list) - 1)
+    #     if index not in indices_used:
+    #         letter_bank.append(letter_list[index])
+    #         indices_used.add(index)
+        
+    # return letter_bank
     letter_bank = []
-    indices_used = set()
+
     while len(letter_bank) < 10:
         index = random.randint(0, len(letter_list) - 1)
-        if index not in indices_used:
-            letter_bank.append(letter_list[index])
-            indices_used.add(index)
-        
-    return letter_bank
-    # AABCDEFGHZ -> {A:2 B:1 C:1 D:1 E:1 F:1 G:1 H:1 Z:1}
-    
+        letter_bank.append(letter_list[index])
+        letter_list.pop(index)
 
+    return letter_bank
+ 
 def uses_available_letters(word, letter_bank):
-    letter_bank_dictionary = {}
+
     # convert letter bank into a map between letter and its frequency
-    for letter in letter_bank:
-        if letter not in letter_bank_dictionary:
-            letter_bank_dictionary[letter]=1
-        else:
-            letter_bank_dictionary[letter]+=1
+    letter_bank_dictionary = {letter: letter_bank.count(letter) for letter in letter_bank}
+    
     # convert input to upper case 
     for letter in word.upper():
         if letter not in letter_bank_dictionary or letter_bank_dictionary[letter] == 0:
@@ -88,9 +94,6 @@ letter_values = {
     'J': 8, 'X': 8,
     'Q': 10, 'Z': 10
 }
-
-
-
 
 def get_highest_word_score(word_list):
     best_word = ""
