@@ -4,6 +4,7 @@ from adagrams.game import draw_letters, uses_available_letters, score_word, get_
 
 def wave_1_run_game():
     display_welcome_message()
+    
     game_continue = True
     while game_continue:
         print("Let's draw 10 letters from the letter pool...")
