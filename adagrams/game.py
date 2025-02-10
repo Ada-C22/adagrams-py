@@ -32,10 +32,9 @@ def draw_letters():
     'Y': 2, 
     'Z': 1
     }
-
+    NUM_LETTERS_TILE = 10
     letters_available = []
     letters_drawn = []
-    NUM_LETTERS_TILE = 10
 
     for letter, quantity in LETTER_POOL.items():
         for _ in range(quantity):
@@ -45,7 +44,7 @@ def draw_letters():
         random_number = random.randint(0, len(letters_available) - 1)
         letters_drawn.append(letters_available[random_number])
         letters_available.pop(random_number)
-    
+
     return letters_drawn
 
 def uses_available_letters(word, letter_bank):
@@ -53,7 +52,6 @@ def uses_available_letters(word, letter_bank):
     Input: word (str) representing word chosen by user, letter_bank (list of strings) representing hand
     Output: bool for whether available letters were used
     """
-    word = word.upper()
     letter_bank_dict = {}
 
     for letter in letter_bank:
@@ -62,7 +60,7 @@ def uses_available_letters(word, letter_bank):
         else:
             letter_bank_dict[letter] += 1
 
-    for letter in word:
+    for letter in word.upper():
         if letter not in letter_bank_dict.keys() or not letter_bank_dict[letter]:
             return False
         else:
@@ -104,9 +102,8 @@ def score_word(word):
         'Z': 10
     }
     score = 0
-    word = word.upper()
 
-    for letter in word:
+    for letter in word.upper():
         score += SCORE_CHART[letter]
 
     if 7 <= len(word) <= 10:
@@ -129,7 +126,7 @@ def get_highest_word_score(word_list):
             highest_score = score
             highest_word = word
         elif score == highest_score:
-            if len(highest_word) != 10 and (len(word) == 10 or len(word) < len(highest_word)):
+            if len(highest_word) != 10 and (len(word) < len(highest_word) or len(word) == 10):
                 highest_word = word
 
     return highest_word, highest_score
